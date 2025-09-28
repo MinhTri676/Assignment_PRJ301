@@ -32,8 +32,8 @@ public class GetListAllProduct extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ProductService productService = new ProductService();
-        List<Product> list = productService.loadAllProduct();
-        request.setAttribute("list", list);
-        request.getRequestDispatcher(URLConstant.PRODUCT_URL).forward(request, response);
+        List<Product> products = productService.loadAllProduct();
+        request.setAttribute("products", products);
+        request.getRequestDispatcher("admin/accounts/list.jsp");
     }
 }

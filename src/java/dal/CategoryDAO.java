@@ -82,7 +82,7 @@ public class CategoryDAO extends DBContext implements Accessible<Category> {
         public static void main(String[] args) {
         CategoryDAO c = new CategoryDAO();
         Category category = c.getObjById("1");
-            System.out.println(category.getCategoryName());
+            System.out.println(category.getTypeID());
     }
 
 }

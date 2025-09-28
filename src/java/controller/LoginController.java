@@ -26,15 +26,10 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher(URLConstant.LOGIN_URL).forward(request, response);
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -45,9 +40,9 @@ public class LoginController extends HttpServlet {
         Response<Account> obj = accountService.checkLogin(account, password);
         if (obj.isStatus()) {
             HttpSession session = request.getSession();
-            session.setAttribute("name", obj.getData().getFirstName());
+            session.setAttribute("account", obj);        
             if (obj.getData().getRoleInSystem() == 1) {
-                response.sendRedirect(URLConstant.ACCOUNT_URL);
+                response.sendRedirect("admin/dashboard.jsp");
             } else {
                 ProductService productService = new ProductService();
                 CategoryService categoryService = new CategoryService();
@@ -63,7 +58,7 @@ public class LoginController extends HttpServlet {
             }
         } else {
             request.setAttribute("error", MessageConstant.LOGIN_FAILED);
-            request.getRequestDispatcher(URLConstant.LOGIN_URL).forward(request, response);
+            request.getRequestDispatcher("auth/login.jsp").forward(request, response);
         }
     }
 

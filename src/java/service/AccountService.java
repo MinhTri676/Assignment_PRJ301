@@ -54,9 +54,11 @@ public class AccountService {
     }
 
     public static void main(String[] args) {
-        Date date = new Date(2004, 06, 01);
-        Account account = new Account("admin1", "abc", "Cao Minh", "Trí", date, true, "0964638722", true, 1);
         AccountService a = new AccountService();
-        a.updateAccount(account);
+        List<Account> account = a.loadAllAccount();
+        
+        
+        System.out.println(account.get(0).getAccount());
+        
     }
 }

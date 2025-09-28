@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
     <body>
-        <c:if test="${empty sessionScope.name}">
+        <c:if test="${empty sessionScope.account}">
             <c:redirect url="index.jsp" />
         </c:if>
-        <c:import url="headerAdmin.jsp"></c:import>
+        <c:import url="components/customer-header.jsp"></c:import>
             <div class="container">
                 <h1>List Of Category</h1>
                 <table>

@@ -115,9 +115,6 @@ public class AccountDAO extends DBContext implements Accessible<Account> {
 
     public static void main(String[] args) {
         AccountDAO a = new AccountDAO();
-        Date date = new Date(2004, 06, 01);
-        Account account = new Account("admin1", "abc", "Cao Minh", "Trí", date, true, "0964638722", true, 1);
-        a.update(account);
 
     }
 

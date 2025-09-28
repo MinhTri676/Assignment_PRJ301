@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>AddAccountController</servlet-name>
         <servlet-class>controller.AddAccount</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>GetListAll</servlet-name>
+        <servlet-name>GetListAllAccount</servlet-name>
         <servlet-class>controller.GetListAllAccount</servlet-class>
     </servlet>
     <servlet>
@@ -77,8 +82,8 @@
         <url-pattern>/addAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>GetListAll</servlet-name>
-        <url-pattern>/getListAll</url-pattern>
+        <servlet-name>GetListAllAccount</servlet-name>
+        <url-pattern>/getListAllAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteAccount</servlet-name>

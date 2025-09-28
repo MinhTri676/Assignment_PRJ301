@@ -2,8 +2,8 @@ package constant;
 
 public class URLConstant {
     public static final String LOGIN_URL = "index.jsp";
-    public static final String ACCOUNT_URL = "listOfAccount.jsp";
-    public static final String ACCOUNT_LIST_URL = "getListAllAccount";
+    public static final String ACCOUNT_URL = "admin/dashboard.jsp";
+    public static final String ACCOUNT_LIST_URL = "admin/list.jsp";
     public static final String UPDATE_ACCOUNT_URL = "updateAccount.jsp";
     public static final String CATEGORY_URL = "listOfCategory.jsp";
     public static final String UPDATE_CATEGORY_URL = "updateCategory.jsp";

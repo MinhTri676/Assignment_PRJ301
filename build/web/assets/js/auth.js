@@ -79,82 +79,8 @@ function toggleForms() {
 }
 
 /* ===================================================================
-   PASSWORD TOGGLE FUNCTIONALITY
-   =================================================================== */
-
-function initializePasswordToggle() {
-  const passwordToggles = document.querySelectorAll(".password-toggle");
-
-  passwordToggles.forEach((toggle) => {
-    toggle.addEventListener("click", function () {
-      const input = this.previousElementSibling;
-      if (!input) return;
-
-      if (input.type === "password") {
-        input.type = "text";
-        this.innerHTML = '<i class="fas fa-eye-slash"></i>';
-      } else {
-        input.type = "password";
-        this.innerHTML = '<i class="fas fa-eye"></i>';
-      }
-    });
-  });
-}
-
-/* ===================================================================
    FORM VALIDATION
    =================================================================== */
-
-function initializeFormValidation() {
-  const forms = document.querySelectorAll(".auth-form form");
-
-  forms.forEach((form) => {
-    form.addEventListener("submit", handleFormSubmit);
-
-    const inputs = form.querySelectorAll("input");
-    inputs.forEach((input) => {
-      input.addEventListener("blur", () => validateField(input));
-      input.addEventListener("input", () => clearFieldError(input));
-    });
-  });
-}
-
-function handleFormSubmit(e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const submitBtn = form.querySelector(".submit-btn");
-  const inputs = form.querySelectorAll("input[required]");
-
-  let isValid = true;
-
-  // Validate all required fields
-  inputs.forEach((input) => {
-    if (!validateField(input)) {
-      isValid = false;
-    }
-  });
-
-  if (isValid) {
-    // Add loading state
-    submitBtn.classList.add("loading");
-    submitBtn.textContent = "Đang xử lý...";
-
-    // Simulate API call
-    setTimeout(() => {
-      // Remove loading state
-      submitBtn.classList.remove("loading");
-
-      if (form.classList.contains("login-form")) {
-        submitBtn.textContent = "Đăng nhập";
-        handleLoginSubmit(form);
-      } else {
-        submitBtn.textContent = "Đăng ký";
-        handleRegisterSubmit(form);
-      }
-    }, 2000);
-  }
-}
 
 function validateField(input) {
   const value = input.value.trim();
@@ -243,25 +169,7 @@ function clearFieldError(input) {
    FORM SUBMISSION HANDLERS
    =================================================================== */
 
-function handleLoginSubmit(form) {
-  const formData = new FormData(form);
-  const username = formData.get("username");
-  const password = formData.get("password");
 
-  // Here you would typically send data to your server
-  console.log("Login attempt:", { username, password });
-
-  // Simulate success/error
-  if (username && password) {
-    showAuthMessage("Đăng nhập thành công!", "success");
-    // Redirect after success
-    setTimeout(() => {
-      window.location.href = "home.jsp";
-    }, 1500);
-  } else {
-    showAuthMessage("Tên đăng nhập hoặc mật khẩu không đúng!", "error");
-  }
-}
 
 function handleRegisterSubmit(form) {
   const formData = new FormData(form);

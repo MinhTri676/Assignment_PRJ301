@@ -30,7 +30,7 @@
                             <i class="fas fa-shopping-bag"></i>
                             Mua sắm ngay
                         </a>
-                        <a href="#why-choose-us" class="btn btn-outline">
+                        <a href="#why-choose-us" class="btn btn-primary">
                             <i class="fas fa-info-circle"></i>
                             Tìm hiểu thêm
                         </a>
@@ -92,11 +92,11 @@
                 </div>
 
                 <div class="products-grid">
-                    <c:forEach var="i" items="${requestScope.list}" begin="0" end="7">
+                    <c:forEach var="i" items="${requestScope.products}" begin="0" end="8">
                         <div class="product-card">
                             <a href="productDetail?product=${i.productId}">
                                 <div class="product-image">
-                                    <img src="/Workshop2${i.productImage}" alt="${i.productName}">
+                                    <img src="${pageContext.request.contextPath}${i.productImage}" alt="${i.productName}">
                                 </div>
                                 <div class="product-info">
                                     <h3>${i.productName}</h3>
@@ -108,153 +108,7 @@
                                 </div>
                             </a>
                         </div>
-                    </c:forEach>
-                    
-                    <!-- Featured Products Sample -->
-                    <div class="product-card">
-                        <a href="productDetail?product=101">
-                            <div class="product-image">
-                                <img src="images/sanPham/iPhone11_ProMax.jpg" alt="iPhone 11 Pro Max">
-                                <div class="product-badge">Bán chạy</div>
-                            </div>
-                            <div class="product-info">
-                                <h3>iPhone 11 Pro Max 256GB</h3>
-                                <div class="product-price">25.990.000₫</div>
-                                <div class="product-old-price">28.990.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=102">
-                            <div class="product-image">
-                                <img src="images/sanPham/samsungGalaxyNote10Plus.jpg" alt="Samsung Galaxy Note 10 Plus">
-                                <div class="product-badge new">Mới</div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Samsung Galaxy Note 10+ 512GB</h3>
-                                <div class="product-price">22.990.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=103">
-                            <div class="product-image">
-                                <img src="images/sanPham/mayGiatElectrolux.jpg" alt="Máy giặt Electrolux">
-                                <div class="product-badge hot">Hot</div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Máy giặt Electrolux 9kg</h3>
-                                <div class="product-price">8.990.000₫</div>
-                                <div class="product-old-price">10.990.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=104">
-                            <div class="product-image">
-                                <img src="images/sanPham/tuLanhPanasonic.png" alt="Tủ lạnh Panasonic">
-                            </div>
-                            <div class="product-info">
-                                <h3>Tủ lạnh Panasonic 335L</h3>
-                                <div class="product-price">12.490.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=105">
-                            <div class="product-image">
-                                <img src="images/sanPham/smartWatchAMA.jpg" alt="Smart Watch AMA">
-                                <div class="product-badge sale">-30%</div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Smart Watch AMA Pro</h3>
-                                <div class="product-price">1.990.000₫</div>
-                                <div class="product-old-price">2.990.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=106">
-                            <div class="product-image">
-                                <img src="images/sanPham/giayTheThaoNu.jpg" alt="Giày thể thao nữ">
-                            </div>
-                            <div class="product-info">
-                                <h3>Giày thể thao nữ Nike Air</h3>
-                                <div class="product-price">2.490.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=107">
-                            <div class="product-image">
-                                <img src="images/sanPham/baloNuChongNuoc.jpg" alt="Balo nữ chống nước">
-                                <div class="product-badge">Yêu thích</div>
-                            </div>
-                            <div class="product-info">
-                                <h3>Balo nữ chống nước cao cấp</h3>
-                                <div class="product-price">890.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="product-card">
-                        <a href="productDetail?product=108">
-                            <div class="product-image">
-                                <img src="images/sanPham/sofaGocPhongKhach.png" alt="Sofa góc phòng khách">
-                            </div>
-                            <div class="product-info">
-                                <h3>Sofa góc phòng khách L-Shape</h3>
-                                <div class="product-price">15.990.000₫</div>
-                                <div class="product-old-price">18.990.000₫</div>
-                                <button class="btn btn-primary btn-sm">
-                                    <i class="fas fa-cart-plus"></i>
-                                    Thêm vào giỏ
-                                </button>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="section-footer">
-                    <a href="customer/products/home.jsp" class="btn btn-outline">
-                        <i class="fas fa-arrow-right"></i>
-                        Xem tất cả sản phẩm
-                    </a>
-                </div>
+                    </c:forEach>                  
             </div>
         </section>
 

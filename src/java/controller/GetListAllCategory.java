@@ -33,8 +33,7 @@ public class GetListAllCategory extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         CategoryService categoryService = new CategoryService();
-        List<Category> list = categoryService.loadAllCategory();
-        request.setAttribute("list", list);
-        request.getRequestDispatcher(URLConstant.CATEGORY_URL).forward(request, response);
+        List<Category> categories = categoryService.loadAllCategory();
+        request.setAttribute("categories", categories);
     }
 }

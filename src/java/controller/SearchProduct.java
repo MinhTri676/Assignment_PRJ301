@@ -34,6 +34,6 @@ public class SearchProduct extends HttpServlet {
         ProductService productService = new ProductService();
         List<Product> list = productService.searchProductL(search);
         request.setAttribute("list", list);
-        request.getRequestDispatcher(URLConstant.DASHBOARD_URL).forward(request, response);
+        request.getRequestDispatcher("customer/products/home.jsp").forward(request, response);
     }
 }

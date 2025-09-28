@@ -289,23 +289,6 @@
             accent-color: #667eea;
         }
 
-        .form-group label:has(input[type="radio"]),
-        .form-group label:has(input[type="checkbox"]) {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            cursor: pointer;
-            padding: 8px 15px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group label:has(input[type="radio"]):hover,
-        .form-group label:has(input[type="checkbox"]):hover {
-            background: rgba(102, 126, 234, 0.1);
-            transform: translateY(-1px);
-        }
 
         .form-section button {
             background: linear-gradient(45deg, #667eea, #764ba2);
