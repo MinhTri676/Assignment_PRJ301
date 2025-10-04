@@ -11,7 +11,6 @@
         <c:if test="${empty sessionScope.account}">
             <c:redirect url="auth/login.jsp" />
         </c:if>
-        <jsp:include page="../components/admin-header.jsp"></jsp:include>
             <div class="container">
                 <h1>List Of Account</h1>
                 <table>

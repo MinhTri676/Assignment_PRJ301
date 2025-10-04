@@ -19,15 +19,12 @@ document.addEventListener("DOMContentLoaded", function () {
 let isLoginForm = true;
 
 function initializeFormSwitching() {
-  const switchButtons = document.querySelectorAll(".switch-form-btn");
-  const slidingBg = document.querySelector(".sliding-bg");
-  const loginContainer = document.querySelector(".login-container");
-  const registerContainer = document.querySelector(".register-container");
-
-  switchButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+  // Sử dụng event delegation thay vì bind trực tiếp
+  document.addEventListener("click", function (e) {
+    if (e.target.classList.contains("switch-form-btn")) {
+      e.preventDefault();
       toggleForms();
-    });
+    }
   });
 }
 
@@ -49,10 +46,10 @@ function toggleForms() {
 
     if (welcomeContent) {
       welcomeContent.innerHTML = `
-                <h2>Chào mừng trở lại!</h2>
-                <p>Đăng nhập để truy cập tài khoản của bạn và tiếp tục mua sắm với những ưu đãi độc quyền.</p>
-                <button class="btn switch-form-btn" type="button">Tạo tài khoản mới</button>
-            `;
+        <h2>Chào mừng trở lại!</h2>
+        <p>Đăng nhập để truy cập tài khoản của bạn và tiếp tục mua sắm với những ưu đãi độc quyền.</p>
+        <button class="btn switch-form-btn" type="button">Tạo tài khoản mới</button>
+      `;
     }
   } else {
     // Switch to register form
@@ -62,25 +59,89 @@ function toggleForms() {
 
     if (welcomeContent) {
       welcomeContent.innerHTML = `
-                <h2>Xin chào!</h2>
-                <p>Tạo tài khoản để khám phá thế giới mua sắm với hàng ngàn sản phẩm chất lượng và ưu đãi hấp dẫn.</p>
-                <button class="btn switch-form-btn" type="button">Đăng nhập</button>
-            `;
+        <h2>Xin chào!</h2>
+        <p>Tạo tài khoản để khám phá thế giới mua sắm với hàng ngàn sản phẩm chất lượng và ưu đãi hấp dẫn.</p>
+        <button class="btn switch-form-btn" type="button">Đăng nhập</button>
+      `;
     }
   }
 
-  // Re-initialize switch button
-  const newSwitchButton = document.querySelector(
-    ".welcome-content .switch-form-btn"
-  );
-  if (newSwitchButton) {
-    newSwitchButton.addEventListener("click", toggleForms);
-  }
+  console.log("Form switched to:", isLoginForm ? "Login" : "Register");
 }
 
-/* ===================================================================
-   FORM VALIDATION
-   =================================================================== */
+// Phần còn lại của code giữ nguyên...
+
+function initializePasswordToggle() {
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".password-toggle")) {
+      e.preventDefault();
+      const button = e.target.closest(".password-toggle");
+      const input = button.parentElement.querySelector("input");
+      const icon = button.querySelector("i");
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.classList.remove("fa-eye");
+        icon.classList.add("fa-eye-slash");
+      } else {
+        input.type = "password";
+        icon.classList.remove("fa-eye-slash");
+        icon.classList.add("fa-eye");
+      }
+    }
+  });
+}
+
+function initializeFormValidation() {
+  // Validation logic
+  document.addEventListener(
+    "blur",
+    function (e) {
+      if (
+        e.target.matches(
+          'input[required], input[type="email"], input[type="password"]'
+        )
+      ) {
+        validateField(e.target);
+      }
+    },
+    true
+  );
+
+  document.addEventListener("input", function (e) {
+    if (e.target.matches("input")) {
+      clearFieldError(e.target);
+    }
+  });
+
+  // Form submission
+  document.addEventListener("submit", function (e) {
+    const form = e.target;
+    if (
+      form.classList.contains("login-form") ||
+      form.classList.contains("register-form")
+    ) {
+      e.preventDefault();
+
+      const inputs = form.querySelectorAll("input[required]");
+      let isValid = true;
+
+      inputs.forEach((input) => {
+        if (!validateField(input)) {
+          isValid = false;
+        }
+      });
+
+      if (isValid) {
+        if (form.classList.contains("login-form")) {
+          handleLoginSubmit(form);
+        } else {
+          handleRegisterSubmit(form);
+        }
+      }
+    }
+  });
+}
 
 function validateField(input) {
   const value = input.value.trim();
@@ -142,11 +203,11 @@ function showFieldValidation(input, isValid, errorMessage) {
     errorElement.className = "field-error";
     errorElement.textContent = errorMessage;
     errorElement.style.cssText = `
-            color: #dc3545;
-            font-size: 0.8rem;
-            margin-top: 5px;
-            padding-left: 15px;
-        `;
+      color: #dc3545;
+      font-size: 0.8rem;
+      margin-top: 5px;
+      padding-left: 15px;
+    `;
     inputGroup.appendChild(errorElement);
   } else {
     // Remove error styling
@@ -165,44 +226,38 @@ function clearFieldError(input) {
   }
 }
 
-/* ===================================================================
-   FORM SUBMISSION HANDLERS
-   =================================================================== */
+function handleLoginSubmit(form) {
+  const formData = new FormData(form);
+  console.log("Login attempt:", Object.fromEntries(formData.entries()));
 
-
+  // Submit form normally
+  form.submit();
+}
 
 function handleRegisterSubmit(form) {
   const formData = new FormData(form);
   const data = Object.fromEntries(formData.entries());
 
-  // Here you would typically send data to your server
   console.log("Registration attempt:", data);
 
-  // Simulate success
   showAuthMessage("Đăng ký thành công! Vui lòng đăng nhập.", "success");
 
-  // Switch to login form after successful registration
   setTimeout(() => {
     toggleForms();
   }, 2000);
 }
 
-/* ===================================================================
-   SOCIAL LOGIN
-   =================================================================== */
-
 function initializeSocialLogin() {
-  const socialButtons = document.querySelectorAll(".social-btn");
-
-  socialButtons.forEach((button) => {
-    button.addEventListener("click", function (e) {
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".social-btn")) {
       e.preventDefault();
+      const button = e.target.closest(".social-btn");
 
-      const provider = this.classList.contains("facebook")
+      const provider = button.classList.contains("facebook")
         ? "Facebook"
-        : this.classList.contains("google")
+        : button.classList.contains("google")
         ? "Google"
-        : this.classList.contains("twitter")
+        : button.classList.contains("twitter")
         ? "Twitter"
         : "Unknown";
 
@@ -210,79 +265,74 @@ function initializeSocialLogin() {
         `Đăng nhập với ${provider} đang được phát triển...`,
         "info"
       );
-    });
+    }
   });
 }
 
-/* ===================================================================
-   AUTHENTICATION FORM INITIALIZATION
-   =================================================================== */
-
 function initializeAuthForms() {
-  // Add form validation styling
   addAuthStyles();
-
-  // Initialize remember me functionality
   initializeRememberMe();
-
-  // Initialize forgot password
   initializeForgotPassword();
 }
 
 function addAuthStyles() {
   const styles = document.createElement("style");
   styles.textContent = `
-        .field-error {
-            animation: slideInError 0.3s ease-out;
-        }
-        
-        @keyframes slideInError {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .input-group.error {
-            border-color: #dc3545 !important;
-        }
-        
-        .input-group.success {
-            border-color: #28a745 !important;
-        }
-        
-        .shake {
-            animation: shake 0.5s ease-in-out;
-        }
-    `;
+    .field-error {
+      animation: slideInError 0.3s ease-out;
+    }
+    
+    @keyframes slideInError {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .input-group.error {
+      border-color: #dc3545 !important;
+    }
+    
+    .input-group.success {
+      border-color: #28a745 !important;
+    }
+    
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+    
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+      }
+    }
+  `;
   document.head.appendChild(styles);
 }
 
 function initializeRememberMe() {
-  const rememberCheckbox = document.querySelector('input[name="remember"]');
-  if (!rememberCheckbox) return;
-
-  rememberCheckbox.addEventListener("change", function () {
-    if (this.checked) {
-      console.log("Remember me enabled");
-    } else {
-      console.log("Remember me disabled");
+  document.addEventListener("change", function (e) {
+    if (e.target.matches('input[name="remember"]')) {
+      console.log("Remember me:", e.target.checked ? "enabled" : "disabled");
     }
   });
 }
 
 function initializeForgotPassword() {
-  const forgotPasswordLinks = document.querySelectorAll(".forgot-password a");
-
-  forgotPasswordLinks.forEach((link) => {
-    link.addEventListener("click", function (e) {
+  document.addEventListener("click", function (e) {
+    if (e.target.closest(".forgot-password a")) {
       e.preventDefault();
       showForgotPasswordModal();
-    });
+    }
   });
 }
 
@@ -290,30 +340,48 @@ function showForgotPasswordModal() {
   const modal = document.createElement("div");
   modal.className = "auth-modal";
   modal.innerHTML = `
-        <div class="auth-modal-content">
-            <span class="close">&times;</span>
-            <h3>Quên mật khẩu</h3>
-            <p>Nhập email của bạn để nhận liên kết đặt lại mật khẩu.</p>
-            <form class="forgot-password-form">
-                <div class="input-group">
-                    <input type="email" placeholder="Email của bạn" required>
-                    <i class="fas fa-envelope"></i>
-                </div>
-                <button type="submit" class="submit-btn">Gửi liên kết</button>
-            </form>
+    <div class="auth-modal-content">
+      <span class="close">&times;</span>
+      <h3>Quên mật khẩu</h3>
+      <p>Nhập email của bạn để nhận liên kết đặt lại mật khẩu.</p>
+      <form class="forgot-password-form">
+        <div class="input-group">
+          <input type="email" placeholder="Email của bạn" required>
+          <i class="fas fa-envelope"></i>
         </div>
-    `;
+        <button type="submit" class="submit-btn">Gửi liên kết</button>
+      </form>
+    </div>
+  `;
+
+  // Add modal styles
+  Object.assign(modal.style, {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: "10000",
+  });
+
+  const modalContent = modal.querySelector(".auth-modal-content");
+  Object.assign(modalContent.style, {
+    backgroundColor: "#fff",
+    padding: "30px",
+    borderRadius: "10px",
+    maxWidth: "400px",
+    width: "90%",
+  });
 
   document.body.appendChild(modal);
 
   // Close modal functionality
-  const closeBtn = modal.querySelector(".close");
-  closeBtn.addEventListener("click", () => {
-    document.body.removeChild(modal);
-  });
-
-  modal.addEventListener("click", (e) => {
-    if (e.target === modal) {
+  modal.addEventListener("click", function (e) {
+    if (e.target === modal || e.target.classList.contains("close")) {
       document.body.removeChild(modal);
     }
   });
@@ -336,10 +404,6 @@ function showForgotPasswordModal() {
   });
 }
 
-/* ===================================================================
-   UTILITY FUNCTIONS
-   =================================================================== */
-
 function validateEmail(email) {
   const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return re.test(email);
@@ -351,18 +415,15 @@ function validatePhone(phone) {
 }
 
 function showAuthMessage(message, type = "info") {
-  // Remove existing messages
   const existingMessage = document.querySelector(".auth-message");
   if (existingMessage) {
     existingMessage.remove();
   }
 
-  // Create message element
   const messageElement = document.createElement("div");
   messageElement.className = `auth-message auth-message-${type}`;
   messageElement.textContent = message;
 
-  // Style the message
   const colors = {
     success: {
       bg: "rgba(40, 167, 69, 0.1)",
@@ -406,31 +467,8 @@ function showAuthMessage(message, type = "info") {
     animation: "slideDown 0.3s ease-out",
   });
 
-  // Add slide down animation
-  const slideDownKeyframes = `
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateX(-50%) translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(-50%) translateY(0);
-            }
-        }
-    `;
-
-  if (!document.querySelector("#slideDownStyles")) {
-    const styleSheet = document.createElement("style");
-    styleSheet.id = "slideDownStyles";
-    styleSheet.textContent = slideDownKeyframes;
-    document.head.appendChild(styleSheet);
-  }
-
-  // Add to DOM
   document.body.appendChild(messageElement);
 
-  // Remove after delay
   setTimeout(() => {
     if (messageElement.parentNode) {
       messageElement.style.animation = "slideUp 0.3s ease-out forwards";
@@ -443,12 +481,8 @@ function showAuthMessage(message, type = "info") {
   }, 4000);
 }
 
-/* ===================================================================
-   KEYBOARD SHORTCUTS
-   =================================================================== */
-
+// Keyboard shortcuts
 document.addEventListener("keydown", (e) => {
-  // Escape key to close modals
   if (e.key === "Escape") {
     const modal = document.querySelector(".auth-modal");
     if (modal) {
@@ -456,7 +490,6 @@ document.addEventListener("keydown", (e) => {
     }
   }
 
-  // Enter key to switch forms (when not in input)
   if (e.key === "Enter" && !e.target.matches("input, button")) {
     const switchBtn = document.querySelector(
       ".welcome-content .switch-form-btn"

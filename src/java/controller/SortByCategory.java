@@ -13,7 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Category;
 import model.Product;
+import service.CategoryService;
 import service.ProductService;
 
 /**
@@ -25,18 +27,24 @@ public class SortByCategory extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoryId = request.getParameter("category");
+        CategoryService categoryService = new CategoryService();
         ProductService productService = new ProductService();
+        String categoryId = request.getParameter("category");
         List<Product> list = productService.sortProductByCategory(categoryId);
+        List<Category> categories = categoryService.loadAllCategory();
+        Category category = categoryService.getCategory(categoryId);
+        String categoryName = category.getCategoryName();
+        request.setAttribute("categoryName", categoryName);
+        request.setAttribute("categories", categories);
         request.setAttribute("list", list);
-        request.getRequestDispatcher(URLConstant.DASHBOARD_URL).forward(request, response);
+        request.getRequestDispatcher("customer/products/home.jsp").forward(request, response);
     }
 
     @Override

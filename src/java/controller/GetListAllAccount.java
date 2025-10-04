@@ -34,7 +34,7 @@ public class GetListAllAccount extends HttpServlet {
         AccountService accountService = new AccountService();
         List<Account> list = accountService.loadAllAccount();
         request.setAttribute("list", list);
-        request.getRequestDispatcher(URLConstant.ACCOUNT_LIST_URL ).forward(request, response);
+        request.getRequestDispatcher("admin/accounts/list.jsp").forward(request, response);
     }
 
 }

@@ -14,7 +14,7 @@
     </head>
     <body>
         <!-- Header -->
-        <c:import url="components/customer-header.jsp"></c:import>
+        <jsp:include page="components/customer-header.jsp"/>
 
         <!-- Hero Section -->
         <section class="hero-section">

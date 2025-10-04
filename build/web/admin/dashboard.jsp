@@ -411,7 +411,7 @@
                     <li><a href="#"><i class="fas fa-shopping-cart"></i><span>Đơn hàng</span></a></li>
                     <li><a href="#"><i class="fas fa-chart-bar"></i><span>Báo cáo</span></a></li>
                     <li><a href="#"><i class="fas fa-cog"></i><span>Cài đặt</span></a></li>
-                    <li><a href="logout"><i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span></a></li>
+                    <li><a href="${pageContext.request.contextPath}/logout"><i class="fas fa-sign-out-alt"></i><span>Đăng xuất</span></a></li>
                 </ul>
             </aside>
 

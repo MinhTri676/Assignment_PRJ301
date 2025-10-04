@@ -5,38 +5,35 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Trang Chủ - Mercurion</title
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>       
-        <link rel="stylesheet" href="/assets/css/main.css">
+        <title>Trang Chủ - Mercurion</title     
     </head> 
-    <body>  
-        <jsp:include page="../../components/customer-header.jsp"></jsp:include>
-       
+    <jsp:include page="../../components/customer-header.jsp"></jsp:include>
+        <body>  
             <main>
-                <h2>Products</h2>
+                <h2 style="margin-left: 50px">${requestScope.categoryName}</h2>
 
                 <div class="container">
-                    <div class="product-list">
+                    <div class="products-grid">
                     <c:forEach var="i" items="${requestScope.list}">
-                        <div class="product">
+                        <div class="product-card">
                             <a href="productDetail?product=${i.productId}">
-                                <img src="${pageContext.request.contextPath}${i.productImage}" width="50">
-                                <h3>${i.productName}</h3>
-                                <p>Price: ${i.getFormatPrice()}</p>
-                                <button class="btn"><span>Buy Now</span></button>
+                                <div class="product-image">
+                                    <img src="${pageContext.request.contextPath}${i.productImage}" alt="${i.productName}">
+                                </div>
+                                <div class="product-info">
+                                    <h3>${i.productName}</h3>
+                                    <div class="product-price">${i.getFormatPrice()}</div>
+                                    <button class="btn"><span>Buy Now</span></button>
+                                </div>
                             </a>
                         </div>
                     </c:forEach>   
+                        
                 </div>
             </div>
         </main>
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 Mercurion. Bảo lưu mọi quyền.</p>
-            </div>
-        </footer>
-        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+        <jsp:include page="../../components/footer.jsp"></jsp:include>
+        <script src="../../assets/js/main.js"></script>
     </body>
 </html>
