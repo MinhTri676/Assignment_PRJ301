@@ -1,37 +1,32 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package model;
 
+/**
+ *
+ * @author caomi
+ */
 public class Category {
 
-    private int typeID;
+    private int categoryId;
     private String categoryName;
-    private String memo;
 
-    public Category(String categoryName, String memo) {
-        this.categoryName = categoryName;
-        this.memo = memo;
+    public Category() {
     }
 
-    public Category(int typeID) {
-        this.typeID = typeID;
-    }
-
-    public Category(int typeID, String categoryName) {
-        this.typeID = typeID;
+    public Category(int categoryId, String categoryName) {
+        this.categoryId = categoryId;
         this.categoryName = categoryName;
     }
 
-    public Category(int typeID, String categoryName, String memo) {
-        this.typeID = typeID;
-        this.categoryName = categoryName;
-        this.memo = memo;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public int getTypeID() {
-        return typeID;
-    }
-
-    public void setTypeID(int typeID) {
-        this.typeID = typeID;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategoryName() {
@@ -42,12 +37,8 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public String getMemo() {
-        return memo;
+    @Override
+    public String toString() {
+        return "CategoryId: " + categoryId + ", CategoryName: " + categoryName;
     }
-
-    public void setMemo(String memo) {
-        this.memo = memo;
-    }
-
 }

@@ -1,52 +1,45 @@
 package model;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.math.BigDecimal;
 
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author caomi
+ */
 public class Product {
-
-    private String productId;
+    private int productId;
     private String productName;
+    private Brand brandId;
+    private Category categoryId;
+    private int quantity;
+    private BigDecimal price;
     private String productImage;
-    private String brief;
-    private Date postDate;
-    private Category type;
-    private Account account;
-    private String unit;
-    private int price;
-    private int discount;
+    private boolean isActive;
 
-    public Product(String productId, String productName, String productImage, int price) {
+    public Product() {
+    }
+
+    public Product(int productId, String productName, Brand brandId, Category categoryId, int quantity, BigDecimal price, String productImage, boolean isActive) {
         this.productId = productId;
         this.productName = productName;
-        this.productImage = productImage;
+        this.brandId = brandId;
+        this.categoryId = categoryId;
+        this.quantity = quantity;
         this.price = price;
-    }
-
-    public Product(String productId, String productName, String productImage, String brief, Date postDate, Category type, Account account, String unit, int price, int discount) {
-        this.productId = productId;
-        this.productName = productName;
         this.productImage = productImage;
-        this.brief = brief;
-        this.postDate = postDate;
-        this.type = type;
-        this.account = account;
-        this.unit = unit;
-        this.price = price;
-        this.discount = discount;
+        this.isActive = isActive;
     }
 
-    public Product(String string, String string0, String string1) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public String getProductId() {
+    public int getProductId() {
         return productId;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(int productId) {
         this.productId = productId;
     }
 
@@ -58,6 +51,38 @@ public class Product {
         this.productName = productName;
     }
 
+    public Brand getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Brand brandId) {
+        this.brandId = brandId;
+    }
+
+    public Category getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Category categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public String getProductImage() {
         return productImage;
     }
@@ -66,67 +91,22 @@ public class Product {
         this.productImage = productImage;
     }
 
-    public String getBrief() {
-        return brief;
+    public boolean isIsActive() {
+        return isActive;
     }
 
-    public void setBrief(String brief) {
-        this.brief = brief;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
-    public Date getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Date postDate) {
-        this.postDate = postDate;
-    }
-
-    public Category getType() {
-        return type;
-    }
-
-    public void setType(Category type) {
-        this.type = type;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public int getPrice() {
-        return price;
+   
+    @Override
+    public String toString() {
+        return "ProductId: " + productId + ", ProductName: " + productName + 
+                ", Brand: " + brandId.getBrandName() + ", Category: " + categoryId.getCategoryName() + 
+                ", Quantity: " + quantity + ", Price: " + price + ", Product Image: " + productImage + 
+                ", Is Active: " + isActive;
     }
     
     
-    public String getFormatPrice() {
-        Locale localeVN = new Locale("vi", "VN");
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(localeVN);
-        return currencyFormatter.format(price);
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
 }
