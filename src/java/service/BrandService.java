@@ -4,22 +4,19 @@
  */
 package service;
 
-import dao.ProductDAO;
+import dao.BrandDAO;
 import java.util.List;
-import model.Product;
+import model.Brand;
 
 /**
  *
  * @author caomi
  */
-public class ProductService {
-    private final ProductDAO dao = new ProductDAO();
+public class BrandService {
+    private final BrandDAO dao = new BrandDAO();
     
-    public List<Product> getAll(){
+    public List<Brand> getAll(){
         return dao.getListAll();
     }
     
-    public Product getProductById(int id){
-        return dao.getObjById(id);
-    }
 }

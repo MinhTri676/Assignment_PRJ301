@@ -1,48 +1,21 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package service;
 
-import dal.CategoryDAO;
+import dao.CategoryDAO;
 import java.util.List;
 import model.Category;
 
+/**
+ *
+ * @author caomi
+ */
 public class CategoryService {
-
-    CategoryDAO categoryDAO;
-
-    public CategoryService() {
-        categoryDAO = new CategoryDAO();
-    }
-
-    public List<Category> loadAllCategory() {
-        List<Category> list = categoryDAO.getListAll();
-        return list;
-    }
-
-    public void addCategory(Category obj) {
-        categoryDAO.insert(obj);
-    }
-
-    public Category getCategory(String typeID) {
-        Category c = categoryDAO.getObjById(typeID);
-        if (c != null) {
-            return c;
-        } else {
-            return null;
-        }
-    }
-
-    public void updateCategory(Category obj) {
-        categoryDAO.update(obj);
-    }
-
-    public void delete(String typeID) {
-        Category c = categoryDAO.getObjById(typeID);
-        if (c != null) {
-            categoryDAO.delete(c);
-        }
-    }
-
-    public static void main(String[] args) {
-        CategoryService c = new CategoryService();
-        c.addCategory(new Category("thiết bị", ""));
+    private final CategoryDAO dao = new CategoryDAO();
+    
+    public List<Category> getAll(){
+        return dao.getListAll();
     }
 }
