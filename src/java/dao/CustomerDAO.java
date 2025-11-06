@@ -4,7 +4,6 @@
  */
 package dao;
 
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,7 +66,7 @@ public class CustomerDAO implements Accessible<Customer> {
             Customer customer = getObjByEmail(email);
             if (customer != null) {
                 return true;
-                        //verifyPassword(password, customer.getPassword(), salt);
+                // verifyPassword(password, customer.getPassword(), salt);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,17 +76,20 @@ public class CustomerDAO implements Accessible<Customer> {
 
     @Override
     public boolean insert(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean update(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -136,7 +138,8 @@ public class CustomerDAO implements Accessible<Customer> {
 
     @Override
     public List<Customer> getListAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from
+                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public static String hashPassword(String password) throws Exception {
@@ -167,7 +170,7 @@ public class CustomerDAO implements Accessible<Customer> {
         CustomerDAO c = new CustomerDAO();
         Customer customer = c.getObjByEmail("admin@gmail.com");
         System.out.println(customer.toString());
-        boolean check = c.login("admin@gmail.com", "@1" );
+        boolean check = c.login("admin@gmail.com", "@1");
         System.out.println(check);
     }
 }
