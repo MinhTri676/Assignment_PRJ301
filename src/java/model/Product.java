@@ -24,8 +24,7 @@ public class Product {
     public Product() {
     }
 
-    public Product(int productId, String productName, Brand brandId, Category categoryId, int quantity, BigDecimal price, String productImage, boolean isActive) {
-        this.productId = productId;
+    public Product(String productName, Brand brandId, Category categoryId, int quantity, BigDecimal price, String productImage, boolean isActive) {
         this.productName = productName;
         this.brandId = brandId;
         this.categoryId = categoryId;

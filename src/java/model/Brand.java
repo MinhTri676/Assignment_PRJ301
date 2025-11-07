@@ -4,11 +4,8 @@
  */
 package model;
 
-/**
- *
- * @author caomi
- */
 public class Brand {
+
     private int brandId;
     private String brandName;
 
@@ -20,7 +17,10 @@ public class Brand {
         this.brandName = brandName;
     }
 
-    
+    public Brand(int brandId) {
+        this.brandId = brandId;
+    }
+
     public int getBrandId() {
         return brandId;
     }
@@ -37,10 +37,8 @@ public class Brand {
         this.brandName = brandName;
     }
 
-    
-
     @Override
     public String toString() {
         return "BrandID: " + brandId + ", BrandName: " + brandName;
-    }  
+    }
 }

@@ -6,45 +6,49 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Brand;
 import service.BrandService;
-import service.CategoryService;
-import service.ProductService;
 
 /**
  *
  * @author caomi
  */
-@WebServlet(name = "CustomerController", urlPatterns = {"/CustomerController"})
-public class CustomerController extends HttpServlet {
-    private final ProductService productService = new ProductService();
-    private final CategoryService categoryService = new CategoryService();
+@WebServlet(name = "BrandController", urlPatterns = {"/BrandController"})
+public class BrandController extends HttpServlet {
+
     private final BrandService brandService = new BrandService();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
-            if (action.equals("register")) {
-                processLoadRegister(request, response);
-            } else if (action.equals("getAllProduct")) {
-                
+
+            if (action.equals("listBrand")) {
+                processListBrand(request, response);
+            } else if (action.equals("loadAddBrandForm")) {
+                processLoadBrandForm(request, response);
             }
         }
     }
-    
-    public void processLoadRegister(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String url = "/WEB-INF/views/auth/register.jsp";
-        request.getRequestDispatcher(url).forward(request, response);
-    }
-    
 
+    public void processListBrand(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Brand> brands = brandService.getAll();
+        request.setAttribute("brands", brands);
+        request.getRequestDispatcher("/WEB-INF/views/admin/brand/viewBrands.jsp").forward(request, response);
+    }
+
+    public void processLoadBrandForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher("/WEB-INF/views/admin/brand/addBrand.jsp").forward(request, response);
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

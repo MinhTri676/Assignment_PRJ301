@@ -16,10 +16,10 @@ Thư viện: https://mvnrepository.com/artifact/com.sun.mail/javax.mail
 Tao mật khẩu ứng dụng: https://myaccount.google.com/apppasswords
  */
 public class EmailUtils {
-    
+    //ypix oorg floj rznn
     // Thông tin tài khoản email dùng để gửi (thay đổi thông tin này)
-    private static final String EMAIL_USERNAME = "thuchanhprj301@gmail.com";
-    private static final String EMAIL_PASSWORD = "ivdjxgimbriruiyv";
+    private static final String EMAIL_USERNAME = "shoptech952@gmail.com";
+    private static final String EMAIL_PASSWORD = "ypixoorgflojrznn";
     
     // Cấu hình SMTP server
     private static final String SMTP_HOST = "smtp.gmail.com";
@@ -136,7 +136,7 @@ public class EmailUtils {
                 + "            <p><strong>Your login information:</strong></p>\n"
                 + "            <p>Username: <strong>" + userID + "</strong></p>\n"
                 + "            <p>You can now login to your account and start exploring our services.</p>\n"
-                + "            <a href=\"http://yourwebsite.com/login\" class=\"button\">Login to Your Account</a>\n"
+                + "            <a href=\"http://localhost:8080/Demo_ASM_PRJ301/MainController\" class=\"button\">Login to Your Account</a>\n"
                 + "            <p>If you have any questions or need assistance, please don't hesitate to contact our support team.</p>\n"
                 + "            <p>Best regards,<br>The Team</p>\n"
                 + "        </div>\n"
@@ -275,6 +275,7 @@ public class EmailUtils {
     }
     
     public static void main(String[] args) {
-        sendRegistrationEmail("lenhattung@gmail.com", "LNT", "LNT");
+        boolean check = sendRegistrationEmail("caominhtri1604@gmail.com", "Cao Minh Trí", "TriCM");
+        System.out.println(check);
     }
 }

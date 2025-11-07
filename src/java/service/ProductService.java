@@ -13,13 +13,22 @@ import model.Product;
  * @author caomi
  */
 public class ProductService {
+
     private final ProductDAO dao = new ProductDAO();
-    
-    public List<Product> getAll(){
+
+    public List<Product> getAll() {
         return dao.getListAll();
     }
-    
-    public Product getProductById(int id){
+
+    public Product getProductById(int id) {
         return dao.getObjById(id);
+    }
+
+    public boolean insert(Product product) {
+        return dao.insert(product);
+    }
+
+    public boolean update(Product product) {
+        return dao.update(product);
     }
 }

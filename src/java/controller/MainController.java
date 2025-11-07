@@ -29,15 +29,24 @@ public class MainController extends HttpServlet {
             String url = "/WEB-INF/views/auth/login.jsp";
 
             String[] authActions = {"login", "logout"};
+            String[] adminActions = {};
             String[] customerActions = {"register"};
-            String[] productActions = {"addProduct", "deleteProduct", "viewProductDetail"};
-
+            String[] productActions = {"addProduct", "deleteProduct", "viewProductDetail", "listProduct"
+                    , "loadAddProductForm", "callUpdateProduct"};
+            String[] categoryActions = {"listCategory", "loadAddCategoryForm"};
+            String[] brandActions = {"listBrand", "loadAddBrandForm"};
             if (Arrays.asList(authActions).contains(action)) {
                 url = "AuthController";
+            } else if (Arrays.asList(adminActions).contains(action)) {
+                url = "AdminController";
             } else if (Arrays.asList(productActions).contains(action)) {
                 url = "ProductController";
             } else if (Arrays.asList(customerActions).contains(action)) {
                 url = "CustomerController";
+            } else if (Arrays.asList(categoryActions).contains(action)){
+                url = "CategoryController";
+            } else if (Arrays.asList(brandActions).contains(action)){
+                url = "BrandController";
             }
             request.getRequestDispatcher(url).forward(request, response);
         }

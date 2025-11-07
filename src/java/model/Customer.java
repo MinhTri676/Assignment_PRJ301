@@ -5,6 +5,7 @@
 package model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  *
@@ -17,7 +18,7 @@ public class Customer {
     private String customerEmail;
     private String customerPhone;
     private String customeSex;
-    private Date customerDate;
+    private LocalDate customerDate;
     private String customerImage;
     private int point;
     private Rank rankId;
@@ -27,14 +28,13 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int customerId, String customerName, String password, String customerEmail, String customerPhone, String customeSex, Date customerDate, String customerImage, int point, Rank rankId, String role, boolean isActive) {
-        this.customerId = customerId;
+    public Customer(String customerName, String password, String customerEmail, String customerPhone, String customeSex, String customerImage, int point, Rank rankId, String role, boolean isActive) {
         this.customerName = customerName;
         this.password = password;
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
         this.customeSex = customeSex;
-        this.customerDate = customerDate;
+        this.customerDate = LocalDate.now();
         this.customerImage = customerImage;
         this.point = point;
         this.rankId = rankId;
@@ -90,11 +90,11 @@ public class Customer {
         this.customeSex = customeSex;
     }
 
-    public Date getCustomerDate() {
+    public LocalDate getCustomerDate() {
         return customerDate;
     }
 
-    public void setCustomerDate(Date customerDate) {
+    public void setCustomerDate(LocalDate customerDate) {
         this.customerDate = customerDate;
     }
 

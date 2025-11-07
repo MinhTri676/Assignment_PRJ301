@@ -6,12 +6,18 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.math.BigDecimal;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Brand;
+import model.Category;
 import model.Product;
+import service.BrandService;
+import service.CategoryService;
 import service.ProductService;
 
 /**
@@ -22,6 +28,9 @@ import service.ProductService;
 public class ProductController extends HttpServlet {
 
     private final ProductService productService = new ProductService();
+    private final BrandService brandService = new BrandService();
+    private final CategoryService categoryService = new CategoryService();
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -29,14 +38,20 @@ public class ProductController extends HttpServlet {
             String action = request.getParameter("action");
 
             if (action.equals("viewProductDetail")) {
-                viewProductDetail(request, response);
-            } else if (action.equals("")) {
-                
+                processViewProductDetail(request, response);
+            } else if (action.equals("listProduct")) {
+                processListProduct(request, response);
+            } else if (action.equals("loadAddProductForm")) {
+                processLoadProductForm(request, response);
+            } else if (action.equals("addProduct")) {
+                processAddProduct(request, response);
+            } else if (action.equals("callUpdateProduct")) {
+                callUpdateProduct(request, response);
             }
         }
     }
 
-    public void viewProductDetail(HttpServletRequest request, HttpServletResponse response){
+    public void processViewProductDetail(HttpServletRequest request, HttpServletResponse response) {
         String txtPid = request.getParameter("pid");
         try {
             int pid = Integer.parseInt(txtPid);
@@ -47,7 +62,100 @@ public class ProductController extends HttpServlet {
             e.printStackTrace();
         }
     }
-            
+
+    public void processListProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Product> products = productService.getAll();
+
+        request.setAttribute("products", products);
+
+        request.getRequestDispatcher("/WEB-INF/views/admin/product/viewProducts.jsp").forward(request, response);
+    }
+
+    public void processLoadProductForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Brand> brands = brandService.getAll();
+        List<Category> categories = categoryService.getAll();
+        request.setAttribute("brands", brands);
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("/WEB-INF/views/admin/product/addProduct.jsp").forward(request, response);
+    }
+
+    public void processAddProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String action = request.getParameter("action");
+        String name = request.getParameter("txtProductName");
+        String txtBrandId = request.getParameter("txtBrandId");
+        String txtcategoryId = request.getParameter("txtCategoryId");
+        String txtQuantity = request.getParameter("txtQuantity");
+        String txtPrice = request.getParameter("txtPrice");
+        String imageBase64 = request.getParameter("productImageBase64");
+        boolean isActive = request.getParameter("txtIsActive") != null;
+
+        int brandId = 0, categoryId = 0, quantity = 0;
+        BigDecimal price = BigDecimal.ZERO;
+        try {
+            brandId = Integer.parseInt(txtBrandId);
+        } catch (Exception e) {
+        }
+        try {
+            categoryId = Integer.parseInt(txtcategoryId);
+        } catch (Exception e) {
+        }
+        try {
+            quantity = Integer.parseInt(txtQuantity);
+        } catch (Exception e) {
+        }
+        try {
+            price = new BigDecimal(txtPrice);
+        } catch (Exception e) {
+        }
+
+        // Build Product
+        Product p = new Product();
+        p.setProductName(name);
+        Brand b = new Brand();
+        b.setBrandId(brandId);
+        p.setBrandId(b);
+        Category c = new Category();
+        c.setCategoryId(categoryId);
+        p.setCategoryId(c);
+        p.setQuantity(quantity);
+        p.setPrice(price);
+        p.setProductImage(imageBase64);
+        p.setIsActive(isActive);
+
+        boolean success = productService.insert(p);
+
+        if (success) {
+            response.sendRedirect(request.getContextPath() + "/MainController?action=listProduct");
+        } else {
+            // on failure, re-populate selects and forward back with product and error messages
+            request.setAttribute("brands", brandService.getAll());
+            request.setAttribute("categories", categoryService.getAll());
+            request.setAttribute("errors", "Không thể lưu sản phẩm. Vui lòng thử lại.");
+            request.getRequestDispatcher("/WEB-INF/views/admin/product/addProduct.jsp").forward(request, response);
+        }
+    }
+
+    public void callUpdateProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String txtPid = request.getParameter("pid");
+        List<Brand> brands = brandService.getAll();
+        List<Category> categories = categoryService.getAll();
+        try {
+            int pid = Integer.parseInt(txtPid);
+            Product product = productService.getProductById(pid);
+            request.setAttribute("product", product);
+            request.setAttribute("brands", brands);
+            request.setAttribute("categories", categories);
+            request.getRequestDispatcher("/WEB-INF/views/admin/product/updateProduct.jsp").forward(request, response);
+        } catch (Exception e) {
+        }
+
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -4,9 +4,12 @@
  */
 package dao;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.Base64;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
@@ -45,9 +48,9 @@ public class CustomerDAO implements Accessible<Customer> {
                 customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
                 customer.setPassword(rs.getString("CUSTOMER_PASSWORD"));
                 customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
-                customer.setCustomerEmail(rs.getString("CUSTOMER_PHONE_NUMBER"));
+                customer.setCustomerPhone(rs.getString("CUSTOMER_PHONE_NUMBER"));
                 customer.setCustomeSex(rs.getString("CUSTOMER_SEX"));
-                customer.setCustomerDate(rs.getDate("CUSTOMER_DATE"));
+                customer.setCustomerDate(rs.getDate("CUSTOMER_DATE").toLocalDate());
                 customer.setCustomerImage(rs.getString("CUSTOMER_IMAGE"));
                 customer.setPoint(rs.getInt("TOTAL_POINT"));
                 customer.setRankId(rank);
@@ -65,8 +68,7 @@ public class CustomerDAO implements Accessible<Customer> {
         try {
             Customer customer = getObjByEmail(email);
             if (customer != null) {
-                return true;
-                // verifyPassword(password, customer.getPassword(), salt);
+                return verifyPassword(password, customer.getPassword(), salt);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,22 +76,60 @@ public class CustomerDAO implements Accessible<Customer> {
         return false;
     }
 
+    private int getRankId(int point) {
+        int rankId = 0;
+        try {
+            Connection c = DBUtils.getConnection();
+            String sql = "SELECT * FROM CUSTOMER_RANK WHERE POINT <= ? ORDER BY POINT DESC";
+            PreparedStatement pst = c.prepareStatement(sql);
+            pst.setInt(1, point);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                Rank rank = new Rank();
+                rank.setRankID(rs.getInt("RANK_ID"));
+                rankId = rank.getRankID();
+            }
+        } catch (Exception e) {
+        }
+
+        return rankId;
+    }
+
     @Override
     public boolean insert(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection c = DBUtils.getConnection();
+            String sql = "INSERT INTO CUSTOMER (CUSTOMER_NAME, CUSTOMER_PASSWORD, CUSTOMER_EMAIL, CUSTOMER_PHONE_NUMBER,"
+                    + " CUSTOMER_SEX, CUSTOMER_DATE, CUSTOMER_IMAGE, TOTAL_POINT, RANK_ID, CUSTOMER_ROLE, ISACTIVE)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, obj.getCustomerName());
+            ps.setString(2, hashPassword(obj.getPassword()));
+            ps.setString(3, obj.getCustomerEmail());
+            ps.setString(4, obj.getCustomerPhone());
+            ps.setString(5, obj.getCustomeSex());
+            ps.setDate(6, Date.valueOf(LocalDate.now()));
+            ps.setString(7, obj.getCustomerImage());
+            ps.setInt(8, obj.getPoint());
+            ps.setInt(9, getRankId(obj.getPoint()));
+            ps.setString(10, obj.getRole());
+            ps.setBoolean(11, obj.isIsActive());
+            int i = ps.executeUpdate();
+            return i > 0;
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     @Override
     public boolean update(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public boolean delete(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
@@ -120,9 +160,9 @@ public class CustomerDAO implements Accessible<Customer> {
                 customer.setCustomerName(rs.getString("CUSTOMER_NAME"));
                 customer.setPassword(rs.getString("CUSTOMER_PASSWORD"));
                 customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
-                customer.setCustomerEmail(rs.getString("CUSTOMER_PHONE_NUMBER"));
+                customer.setCustomerPhone(rs.getString("CUSTOMER_PHONE_NUMBER"));
                 customer.setCustomeSex(rs.getString("CUSTOMER_SEX"));
-                customer.setCustomerDate(rs.getDate("CUSTOMER_DATE"));
+                customer.setCustomerDate(rs.getDate("CUSTOMER_DATE").toLocalDate());
                 customer.setCustomerImage(rs.getString("CUSTOMER_IMAGE"));
                 customer.setPoint(rs.getInt("TOTAL_POINT"));
                 customer.setRankId(rank);
@@ -138,8 +178,7 @@ public class CustomerDAO implements Accessible<Customer> {
 
     @Override
     public List<Customer> getListAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from
-                                                                       // nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public static String hashPassword(String password) throws Exception {
@@ -168,9 +207,13 @@ public class CustomerDAO implements Accessible<Customer> {
 
     public static void main(String[] args) {
         CustomerDAO c = new CustomerDAO();
-        Customer customer = c.getObjByEmail("admin@gmail.com");
-        System.out.println(customer.toString());
-        boolean check = c.login("admin@gmail.com", "@1");
+//        Customer customer = c.getObjByEmail("admin@gmail.com");
+//        System.out.println(customer.toString());
+        Rank rank = new Rank();
+        rank.setRankID(c.getRankId(1001));
+        boolean check = c.insert(new Customer("tri", "123456", "tri@gmail.com", "0964638722",
+                                           "Nam", null, 1001, rank, "admin", true));
         System.out.println(check);
+
     }
 }

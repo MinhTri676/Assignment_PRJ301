@@ -43,7 +43,7 @@ public class DashboardController extends HttpServlet {
             request.setAttribute("categories", categories);
             request.setAttribute("brands", brands);
             
-            request.getRequestDispatcher("/WEB-INF/views/customer/dashboard.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request, response);
         }
     }
 

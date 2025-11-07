@@ -9,11 +9,9 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/auth.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/auth/auth.css" />
     </head>
     <body>
-        <%@ include file="/WEB-INF/views/partials/header.jsp" %>
-
         <main class="container my-5">
             <div class="auth-root mx-auto shadow-sm">
                 <div class="auth-inner p-4">
@@ -30,18 +28,18 @@
                     <form id="registerForm" action="${pageContext.request.contextPath}/auth/register" method="post" novalidate>
                         <div class="mb-3">
                             <label for="name" class="form-label small">Họ & tên</label>
-                            <input type="text" name="name" id="name" class="form-control form-control-sm" placeholder="Tên của bạn (tùy chọn)" />
+                            <input type="text" name="txtFullname" id="name" class="form-control form-control-sm" placeholder="Tên của bạn (tùy chọn)" />
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label small">Email</label>
-                            <input type="email" name="email" id="email" class="form-control form-control-sm" placeholder="you@example.com" required />
+                            <input type="email" name="txtEmail" id="email" class="form-control form-control-sm" placeholder="you@example.com" required />
                             <div class="invalid-feedback">Vui lòng nhập email hợp lệ.</div>
                         </div>
 
                         <div class="mb-3">
                             <label for="password" class="form-label small">Mật khẩu</label>
-                            <input type="password" name="password" id="password" class="form-control form-control-sm" placeholder="Mật khẩu (ít nhất 6 ký tự)" required minlength="6" />
+                            <input type="password" name="txtPassword" id="password" class="form-control form-control-sm" placeholder="Mật khẩu (ít nhất 6 ký tự)" required minlength="6" />
                             <div class="invalid-feedback">Mật khẩu ít nhất 6 ký tự.</div>
                         </div>
 
@@ -66,9 +64,6 @@
                 </div>
             </div>
         </main>
-
-        <%@ include file="/WEB-INF/views/partials/footer.jsp" %>
-
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
         <script>

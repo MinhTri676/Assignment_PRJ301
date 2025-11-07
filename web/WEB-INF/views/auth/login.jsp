@@ -9,7 +9,7 @@
 
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/auth.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/auth/auth.css" />
     </head>
     <body>
 
@@ -23,7 +23,7 @@
                     </c:if>
 
                     <!-- Standard Login form (email + password) -->
-                    <form id="loginForm" action="${pageContext.request.contextPath}/MainController">
+                    <form id="loginForm" action="MainController" method="POST">
                         <input type="hidden" name="action" value="login"/>
                         <div class="mb-3">
                             <label for="email" class="form-label small">Email</label>
@@ -86,7 +86,8 @@
 
                         <!-- Step 1: enter email and submit to server to send OTP -->
                         <div id="otpStepEmail">
-                            <form id="formSendOtp" action="${pageContext.request.contextPath}/auth/send-otp" method="post" novalidate>
+                            <form id="formSendOtp" action="${pageContext.request.contextPath}/MainController">
+                                <input type="hidden" name="action" value="sendOTP"/>
                                 <label for="otpEmail" class="form-label small">Nhập email</label>
                                 <input type="email" name="email" id="otpEmail" class="form-control form-control-sm mb-2" placeholder="you@example.com" required />
                                 <div class="d-flex gap-2">

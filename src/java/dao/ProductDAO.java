@@ -32,8 +32,8 @@ public class ProductDAO implements Accessible<Product> {
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, obj.getProductName());
             pst.setInt(2, obj.getQuantity());
-            pst.setObject(3, obj.getBrandId());
-            pst.setObject(4, obj.getCategoryId());
+            pst.setInt(3, obj.getBrandId().getBrandId());
+            pst.setInt(4, obj.getCategoryId().getCategoryId());
             pst.setBigDecimal(5, obj.getPrice());
             pst.setString(6, obj.getProductImage());
             pst.setBoolean(7, obj.isIsActive());
@@ -119,6 +119,7 @@ public class ProductDAO implements Accessible<Product> {
                 product.setBrandId(brand);
                 product.setCategoryId(category);
                 product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setProductImage(rs.getString("PRODUCT_IMAGE"));
                 product.setIsActive(rs.getBoolean("ISACTIVE"));
                 return product;
             }
@@ -147,13 +148,14 @@ public class ProductDAO implements Accessible<Product> {
 
                 Brand brand = new Brand(rs.getInt("BRAND_ID"), rs.getNString("BRAND_NAME"));
                 Category category = new Category(rs.getInt("CATEGORY_ID"), rs.getNString("CATEGORY_NAME"));
-                
+
                 product.setProductId(rs.getInt("PRODUCT_ID"));
                 product.setProductName(rs.getString("PRODUCT_NAME"));
                 product.setQuantity(rs.getInt("QUANTITY"));
                 product.setBrandId(brand);
                 product.setCategoryId(category);
                 product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setProductImage(rs.getString("PRODUCT_IMAGE"));
                 product.setIsActive(rs.getBoolean("ISACTIVE"));
                 list.add(product);
             }
@@ -189,6 +191,7 @@ public class ProductDAO implements Accessible<Product> {
                 product.setBrandId(brand);
                 product.setCategoryId(category);
                 product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setProductImage(rs.getString("PRODUCT_IMAGE"));
                 product.setIsActive(rs.getBoolean("ISACTIVE"));
                 list.add(product);
             }
@@ -200,7 +203,7 @@ public class ProductDAO implements Accessible<Product> {
 
     public static void main(String[] args) {
         ProductDAO p = new ProductDAO();
-        Product product = p.getObjById(10001);
+        Product product = p.getObjById(100050);
         System.out.println(product.toString());
     }
 }

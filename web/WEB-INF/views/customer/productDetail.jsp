@@ -15,10 +15,10 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
 
         <!-- Your theme CSS: load after other CSS -->
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/productDetail.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/customer/productDetail.css" />
     </head>
     <body>
-        <%@ include file="/WEB-INF/views/partials/header.jsp" %>
+        <%@ include file="/WEB-INF/views/partials/customerHeader.jsp" %>
 
         <main class="container-main container my-4">
             <div class="product-detail-root">

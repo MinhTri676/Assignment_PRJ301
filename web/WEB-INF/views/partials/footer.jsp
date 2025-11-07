@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/footer.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/partials/footer.css" />
 
 <footer class="site-footer mt-5" role="contentinfo">
     <div class="container footer-inner py-4">
