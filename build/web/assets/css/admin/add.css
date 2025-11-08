@@ -1,0 +1,129 @@
+/* Styles specific to product-create.jsp / product-edit.jsp
+   Scoped under .product-page to avoid conflicts with dashboard.css
+   Load this AFTER admin.css and dashboard.css
+*/
+
+.product-page .card {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.product-page .card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-md);
+    background: linear-gradient(90deg, rgba(173,101,185,0.03), rgba(118,75,162,0.02));
+    border-bottom: 1px solid var(--border-color);
+}
+.product-page .card-header h3 {
+    margin: 0;
+    font-size: var(--font-lg);
+    color: var(--primary-dark);
+}
+
+/* Use the existing helpers but scoped */
+.product-page .form-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+}
+.product-page .form-col {
+    min-width: 220px;
+    flex: 1;
+}
+
+.product-page .col-fixed {
+    max-width: 220px;
+}
+
+.product-page .form-input,
+.product-page .form-select,
+.product-page .form-file {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-primary);
+    font-size: var(--font-base);
+}
+
+.product-page .file-area {
+    display:flex;
+    gap:18px;
+    align-items:flex-start;
+}
+.product-page .file-meta {
+    flex:1;
+}
+.product-page .file-hint {
+    margin-top:6px;
+    color:var(--text-light);
+    font-size:0.85rem;
+}
+
+.product-page .preview-wrapper {
+    text-align:center;
+    width:160px;
+}
+.product-page .preview-wrapper .thumb-preview {
+    width:140px;
+    height:140px;
+    border-radius:8px;
+    border:1px solid var(--border-color);
+    object-fit:cover;
+}
+
+.product-page .form-actions {
+    display:flex;
+    gap:12px;
+    margin-top:14px;
+}
+.product-page .form-actions .btn {
+    min-width:120px;
+}
+
+.product-page .field-help {
+    font-size:0.85rem;
+    color:var(--text-light);
+    margin-top:6px;
+}
+
+.product-page .error-small {
+    color:var(--danger);
+    font-size:0.85rem;
+    margin-top:6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+    .product-page .card {
+        padding: 0;
+    }
+    .product-page .form-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .product-page .preview-wrapper {
+        width: 100%;
+        text-align: left;
+    }
+    .product-page .preview-wrapper .thumb-preview {
+        width:100%;
+        height:auto;
+        max-height:320px;
+    }
+}
+
+/* Focus state (scoped) */
+.product-page .form-input:focus,
+.product-page .form-select:focus,
+.product-page .form-file:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(173,101,185,0.08);
+    border-color: var(--primary-dark);
+}

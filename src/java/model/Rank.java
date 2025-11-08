@@ -16,7 +16,11 @@ public class Rank {
 
     public Rank() {
     }
-
+    
+    public Rank(int rankID, String rankName) {
+        this.rankID = rankID;
+        this.rankName = rankName;
+    }
     public Rank(int rankID, String rankName, int point, double voucher) {
         this.rankID = rankID;
         this.rankName = rankName;

@@ -17,7 +17,7 @@ public class Customer {
     private String password;
     private String customerEmail;
     private String customerPhone;
-    private String customeSex;
+    private String customerSex;
     private LocalDate customerDate;
     private String customerImage;
     private int point;
@@ -28,12 +28,26 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(String customerName, String password, String customerEmail, String customerPhone, String customeSex, String customerImage, int point, Rank rankId, String role, boolean isActive) {
+    public Customer(String customerName, String password, String customerEmail, String customerPhone, String customerSex, String customerImage, int point, String role, boolean isActive) {
         this.customerName = customerName;
         this.password = password;
         this.customerEmail = customerEmail;
         this.customerPhone = customerPhone;
-        this.customeSex = customeSex;
+        this.customerSex = customerSex;
+        this.customerImage = customerImage;
+        this.point = point;
+        this.role = role;
+        this.isActive = isActive;
+    }
+    
+    
+
+    public Customer(String customerName, String password, String customerEmail, String customerPhone, String customerSex, String customerImage, int point, Rank rankId, String role, boolean isActive) {
+        this.customerName = customerName;
+        this.password = password;
+        this.customerEmail = customerEmail;
+        this.customerPhone = customerPhone;
+        this.customerSex = customerSex;
         this.customerDate = LocalDate.now();
         this.customerImage = customerImage;
         this.point = point;
@@ -41,6 +55,7 @@ public class Customer {
         this.role = role;
         this.isActive = isActive;
     }
+
     
     public int getCustomerId() {
         return customerId;
@@ -82,12 +97,12 @@ public class Customer {
         this.customerPhone = customerPhone;
     }
 
-    public String getCustomeSex() {
-        return customeSex;
+    public String getCustomerSex() {
+        return customerSex;
     }
 
-    public void setCustomeSex(String customeSex) {
-        this.customeSex = customeSex;
+    public void setCustomerSex(String customeSex) {
+        this.customerSex = customeSex;
     }
 
     public LocalDate getCustomerDate() {
@@ -143,7 +158,7 @@ public class Customer {
     public String toString() {
         return "customerId=: " + customerId + ", customerName: " + customerName + 
                 ", password: " + password + ", customerEmail: " + customerEmail + 
-                ", customerPhone: " + customerPhone + ", customeSex: " + customeSex + 
+                ", customerPhone: " + customerPhone + ", customeSex: " + customerSex + 
                 ", customerDate: " + customerDate + ", point: " + point +
                 ", Customer Image: "+ customerImage + ", rankId: " + rankId.getRankID() +
                 ", Role: " + role + ", isActive: " + isActive;

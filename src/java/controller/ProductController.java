@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Brand;
 import model.Category;
 import model.Product;
@@ -33,6 +34,7 @@ public class ProductController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
@@ -47,6 +49,10 @@ public class ProductController extends HttpServlet {
                 processAddProduct(request, response);
             } else if (action.equals("callUpdateProduct")) {
                 callUpdateProduct(request, response);
+            } else if (action.equals("updateProduct")) {
+                updateProduct(request, response);
+            } else if (action.equals("deleteProduct")) {
+                processDeleteProduct(request, response);
             }
         }
     }
@@ -84,7 +90,6 @@ public class ProductController extends HttpServlet {
     public void processAddProduct(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String action = request.getParameter("action");
         String name = request.getParameter("txtProductName");
         String txtBrandId = request.getParameter("txtBrandId");
         String txtcategoryId = request.getParameter("txtCategoryId");
@@ -154,6 +159,81 @@ public class ProductController extends HttpServlet {
         } catch (Exception e) {
         }
 
+    }
+
+    public void updateProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String txtProductId = request.getParameter("txtProductId");
+        String name = request.getParameter("txtProductName");
+        String txtBrandId = request.getParameter("txtBrandId");
+        String txtcategoryId = request.getParameter("txtCategoryId");
+        String txtQuantity = request.getParameter("txtQuantity");
+        String txtPrice = request.getParameter("txtPrice");
+        String imageBase64 = request.getParameter("productImageBase64");
+        boolean isActive = request.getParameter("txtIsActive") != null;
+
+        int productId = 0, brandId = 0, categoryId = 0, quantity = 0;
+        BigDecimal price = BigDecimal.ZERO;
+        try {
+            productId = Integer.parseInt(txtProductId);
+        } catch (Exception e) {
+        }
+        try {
+            brandId = Integer.parseInt(txtBrandId);
+        } catch (Exception e) {
+        }
+        try {
+            categoryId = Integer.parseInt(txtcategoryId);
+        } catch (Exception e) {
+        }
+        try {
+            quantity = Integer.parseInt(txtQuantity);
+        } catch (Exception e) {
+        }
+        try {
+            price = new BigDecimal(txtPrice);
+        } catch (Exception e) {
+        }
+
+        // Build Product
+        Product product = new Product();
+        product.setProductId(productId);
+        product.setProductName(name);
+        Brand b = new Brand();
+        b.setBrandId(brandId);
+        product.setBrandId(b);
+        Category c = new Category();
+        c.setCategoryId(categoryId);
+        product.setCategoryId(c);
+        product.setQuantity(quantity);
+        product.setPrice(price);
+        product.setProductImage(imageBase64);
+        product.setIsActive(isActive);
+
+        boolean success = productService.update(product);
+
+        if (success) {
+            response.sendRedirect(request.getContextPath() + "/MainController?action=listProduct");
+        } else {
+            request.setAttribute("product", product);
+            request.setAttribute("brands", brandService.getAll());
+            request.setAttribute("categories", categoryService.getAll());
+            request.setAttribute("errors", "Không thể lưu sản phẩm. Vui lòng thử lại.");
+            request.getRequestDispatcher("/WEB-INF/views/admin/product/updateProduct.jsp").forward(request, response);
+        }
+    }
+
+    public void processDeleteProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String txtPid = request.getParameter("pid");
+        int pid = 0;
+        try {
+            pid = Integer.parseInt(txtPid);
+        } catch (Exception e) {
+        }
+        Product product = productService.getProductById(pid);
+        boolean check = productService.delete(product);
+        response.sendRedirect(request.getContextPath() + "/MainController?action=listProduct");
     }
 
     @Override

@@ -30,9 +30,10 @@ public class MainController extends HttpServlet {
 
             String[] authActions = {"login", "logout"};
             String[] adminActions = {};
-            String[] customerActions = {"register"};
+            String[] customerActions = {"register", "listCustomer", "loadAddCustomerForm","addCustomer"
+                                      , "callUpdateCustomer", "updateCustomer", "deleteCustomer"};
             String[] productActions = {"addProduct", "deleteProduct", "viewProductDetail", "listProduct"
-                    , "loadAddProductForm", "callUpdateProduct"};
+                                     , "loadAddProductForm", "callUpdateProduct", "updateProduct", "deleteProduct"};
             String[] categoryActions = {"listCategory", "loadAddCategoryForm"};
             String[] brandActions = {"listBrand", "loadAddBrandForm"};
             if (Arrays.asList(authActions).contains(action)) {

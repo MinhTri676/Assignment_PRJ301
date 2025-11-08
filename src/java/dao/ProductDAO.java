@@ -57,16 +57,18 @@ public class ProductDAO implements Accessible<Product> {
                     + "    , CATEGORY_ID = ?"
                     + "    , PRICE = ?"
                     + "    , PRODUCT_IMAGE = ?"
-                    + "    , ISACTIVE = ?";
+                    + "    , ISACTIVE = ?"
+                    + " WHERE PRODUCT_ID = ?";
 
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, obj.getProductName());
             pst.setInt(2, obj.getQuantity());
-            pst.setInt(3, obj.getQuantity());
-            pst.setInt(4, obj.getQuantity());
+            pst.setInt(3, obj.getBrandId().getBrandId());
+            pst.setInt(4, obj.getCategoryId().getCategoryId());
             pst.setBigDecimal(5, obj.getPrice());
             pst.setString(6, obj.getProductImage());
             pst.setBoolean(7, obj.isIsActive());
+            pst.setInt(8, obj.getProductId());
             int i = pst.executeUpdate();
             return i > 0;
         } catch (Exception e) {
@@ -204,6 +206,8 @@ public class ProductDAO implements Accessible<Product> {
     public static void main(String[] args) {
         ProductDAO p = new ProductDAO();
         Product product = p.getObjById(100050);
-        System.out.println(product.toString());
+        product.setIsActive(true);
+        boolean check = p.update(product);
+        System.out.println(check);
     }
 }

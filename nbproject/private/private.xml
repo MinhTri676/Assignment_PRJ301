@@ -3,7 +3,56 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/Rank.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/CategoryController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/filter/EncodingFilter.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/CategoryDAO.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/customer/dashboard.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/CategoryService.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/ProductDAO.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/RankService.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/category/viewCategories.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/adminHeader.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/sidebar.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/customer/productDetail.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/Product.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/customerHeader.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/MainController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/product/addProduct.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/customer/updateCustomer.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/BrandDAO.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/footer.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/auth/login.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/customer/addCustomer.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/customer/viewCustomer.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/DashboardController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/category/addCategory.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/admin/dashboard.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/RankDAO.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/ProductService.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/brand/viewBrands.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/admin/add.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/CustomerDAO.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/AuthController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/header.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/product/updateProduct.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/CustomerController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/filter/AdminFilter.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/index.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/Customer.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/customer/productDetail.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/ProductController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/AdminController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/customer/dashboard.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/auth/auth.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/partials/header.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/partials/footer.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/dashboard.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/product/viewProducts.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/CustomerService.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/BrandController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/dashboard.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/brand/addBrand.jsp</file>
         </group>
     </open-files>
 </project-private>

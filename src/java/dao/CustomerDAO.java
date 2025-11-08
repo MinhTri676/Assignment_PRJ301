@@ -4,12 +4,12 @@
  */
 package dao;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import javax.crypto.SecretKeyFactory;
@@ -49,7 +49,7 @@ public class CustomerDAO implements Accessible<Customer> {
                 customer.setPassword(rs.getString("CUSTOMER_PASSWORD"));
                 customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
                 customer.setCustomerPhone(rs.getString("CUSTOMER_PHONE_NUMBER"));
-                customer.setCustomeSex(rs.getString("CUSTOMER_SEX"));
+                customer.setCustomerSex(rs.getString("CUSTOMER_SEX"));
                 customer.setCustomerDate(rs.getDate("CUSTOMER_DATE").toLocalDate());
                 customer.setCustomerImage(rs.getString("CUSTOMER_IMAGE"));
                 customer.setPoint(rs.getInt("TOTAL_POINT"));
@@ -97,6 +97,9 @@ public class CustomerDAO implements Accessible<Customer> {
 
     @Override
     public boolean insert(Customer obj) {
+        if (getObjByEmail(obj.getCustomerEmail()) != null) {
+            return false;
+        }
         try {
             Connection c = DBUtils.getConnection();
             String sql = "INSERT INTO CUSTOMER (CUSTOMER_NAME, CUSTOMER_PASSWORD, CUSTOMER_EMAIL, CUSTOMER_PHONE_NUMBER,"
@@ -108,7 +111,7 @@ public class CustomerDAO implements Accessible<Customer> {
             ps.setString(2, hashPassword(obj.getPassword()));
             ps.setString(3, obj.getCustomerEmail());
             ps.setString(4, obj.getCustomerPhone());
-            ps.setString(5, obj.getCustomeSex());
+            ps.setString(5, obj.getCustomerSex());
             ps.setDate(6, Date.valueOf(LocalDate.now()));
             ps.setString(7, obj.getCustomerImage());
             ps.setInt(8, obj.getPoint());
@@ -118,18 +121,65 @@ public class CustomerDAO implements Accessible<Customer> {
             int i = ps.executeUpdate();
             return i > 0;
         } catch (Exception e) {
+
         }
         return false;
     }
 
     @Override
     public boolean update(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection c = DBUtils.getConnection();
+            String sql = "UPDATE CUSTOMER"
+                    + " SET CUSTOMER_NAME = ?"
+                    + " , CUSTOMER_PASSWORD = ?"
+                    + " , CUSTOMER_EMAIL = ?"
+                    + " , CUSTOMER_PHONE_NUMBER = ?"
+                    + " , CUSTOMER_SEX = ?"
+                    + " , CUSTOMER_DATE = ?"
+                    + " , CUSTOMER_IMAGE = ?"
+                    + " , TOTAL_POINT = ?"
+                    + " , RANK_ID = ?"
+                    + " , CUSTOMER_ROLE = ?"
+                    + " , ISACTIVE = ?"
+                    + " WHERE CUSTOMER_ID = ?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setString(1, obj.getCustomerName());
+            ps.setString(2, hashPassword(obj.getPassword()));
+            ps.setString(3, obj.getCustomerEmail());
+            ps.setString(4, obj.getCustomerPhone());
+            ps.setString(5, obj.getCustomerSex());
+            ps.setDate(6, Date.valueOf(obj.getCustomerDate()));
+            ps.setString(7, obj.getCustomerImage());
+            ps.setInt(8, obj.getPoint());
+            ps.setInt(9, getRankId(obj.getPoint()));
+            ps.setString(10, obj.getRole());
+            ps.setBoolean(11, obj.isIsActive());
+            ps.setInt(12, obj.getCustomerId());
+            int i = ps.executeUpdate();
+            return i > 0;
+        } catch (Exception e) {
+
+        }
+        return false;
     }
 
     @Override
     public boolean delete(Customer obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection c = DBUtils.getConnection();
+            String sql = "UPDATE CUSTOMER SET ISACTIVE = 0"
+                    + "      WHERE CUSTOMER_ID = ?";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, obj.getCustomerId());
+
+            int i = ps.executeUpdate();
+            return i > 0;
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     @Override
@@ -161,7 +211,7 @@ public class CustomerDAO implements Accessible<Customer> {
                 customer.setPassword(rs.getString("CUSTOMER_PASSWORD"));
                 customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
                 customer.setCustomerPhone(rs.getString("CUSTOMER_PHONE_NUMBER"));
-                customer.setCustomeSex(rs.getString("CUSTOMER_SEX"));
+                customer.setCustomerSex(rs.getString("CUSTOMER_SEX"));
                 customer.setCustomerDate(rs.getDate("CUSTOMER_DATE").toLocalDate());
                 customer.setCustomerImage(rs.getString("CUSTOMER_IMAGE"));
                 customer.setPoint(rs.getInt("TOTAL_POINT"));
@@ -178,7 +228,45 @@ public class CustomerDAO implements Accessible<Customer> {
 
     @Override
     public List<Customer> getListAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Customer> list = new ArrayList<>();
+        try {
+            // 1 - Tao ket noi
+            Connection conn = DBUtils.getConnection();
+
+            // 2 - Tao cau lenh
+            String sql = "SELECT c.*, cr.RANK_NAME FROM CUSTOMER c"
+                    + " JOIN CUSTOMER_RANK cr ON c.RANK_ID = cr.RANK_ID";
+
+            // 3 - Tao statement de co the run cau lenh
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            // 4 - Thuc thi cau lenh
+            ResultSet rs = pst.executeQuery();
+
+            // 5 - Kiem tra
+            while (rs.next()) {
+                Customer customer = new Customer();
+
+                Rank rank = new Rank(rs.getInt("RANK_ID"), rs.getString("RANK_NAME"));
+
+                customer.setCustomerId(rs.getInt("CUSTOMER_ID"));
+                customer.setCustomerName(rs.getNString("CUSTOMER_NAME"));
+                customer.setPassword(rs.getString("CUSTOMER_PASSWORD"));
+                customer.setCustomerEmail(rs.getString("CUSTOMER_EMAIL"));
+                customer.setCustomerPhone(rs.getString("CUSTOMER_PHONE_NUMBER"));
+                customer.setCustomerSex(rs.getNString("CUSTOMER_SEX"));
+                customer.setCustomerDate(rs.getDate("CUSTOMER_DATE").toLocalDate());
+                customer.setCustomerImage(rs.getString("CUSTOMER_IMAGE"));
+                customer.setPoint(rs.getInt("TOTAL_POINT"));
+                customer.setRankId(rank);
+                customer.setRole(rs.getString("CUSTOMER_ROLE"));
+                customer.setIsActive(rs.getBoolean("ISACTIVE"));
+                list.add(customer);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
     }
 
     public static String hashPassword(String password) throws Exception {
@@ -207,13 +295,10 @@ public class CustomerDAO implements Accessible<Customer> {
 
     public static void main(String[] args) {
         CustomerDAO c = new CustomerDAO();
-//        Customer customer = c.getObjByEmail("admin@gmail.com");
-//        System.out.println(customer.toString());
-        Rank rank = new Rank();
-        rank.setRankID(c.getRankId(1001));
-        boolean check = c.insert(new Customer("tri", "123456", "tri@gmail.com", "0964638722",
-                                           "Nam", null, 1001, rank, "admin", true));
-        System.out.println(check);
+        Customer customer = c.getObjByEmail("tri@gmail.com");
+        System.out.println(customer.toString());
 
+//        boolean check = c.update(customer);
+//        System.out.println(check);
     }
 }

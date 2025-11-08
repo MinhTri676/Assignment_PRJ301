@@ -31,4 +31,8 @@ public class ProductService {
     public boolean update(Product product) {
         return dao.update(product);
     }
+    
+    public boolean delete(Product product){
+        return dao.delete(product);
+    }
 }
