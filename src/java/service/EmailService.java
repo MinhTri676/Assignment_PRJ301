@@ -4,10 +4,20 @@
  */
 package service;
 
+import util.EmailUtils;
+
 /**
  *
  * @author caomi
  */
 public class EmailService {
-    
+
+    public String sendOTP(String customerEmail, String customerName) {
+        try {
+           return EmailUtils.sendOtpEmail(customerEmail, customerName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

@@ -1,6 +1,6 @@
-
 package util;
 
+import java.security.SecureRandom;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -12,22 +12,25 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 /**
-Thư viện: https://mvnrepository.com/artifact/com.sun.mail/javax.mail
-Tao mật khẩu ứng dụng: https://myaccount.google.com/apppasswords
+ * Thư viện: https://mvnrepository.com/artifact/com.sun.mail/javax.mail Tao mật
+ * khẩu ứng dụng: https://myaccount.google.com/apppasswords
  */
 public class EmailUtils {
+
     //ypix oorg floj rznn
     // Thông tin tài khoản email dùng để gửi (thay đổi thông tin này)
+    private static final int LENGHT = 6, MINUTE = 5;
+    private static final SecureRandom random = new SecureRandom();
     private static final String EMAIL_USERNAME = "shoptech952@gmail.com";
     private static final String EMAIL_PASSWORD = "ypixoorgflojrznn";
-    
+
     // Cấu hình SMTP server
     private static final String SMTP_HOST = "smtp.gmail.com";
     private static final String SMTP_PORT = "587";
-    
+
     /**
      * Gửi email thông báo đăng ký thành công
-     * 
+     *
      * @param toEmail Địa chỉ email người nhận
      * @param fullName Tên đầy đủ của người dùng
      * @param userID ID người dùng
@@ -41,7 +44,7 @@ public class EmailUtils {
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.host", SMTP_HOST);
             props.put("mail.smtp.port", SMTP_PORT);
-            
+
             // Tạo phiên xác thực
             Session session = Session.getInstance(props, new Authenticator() {
                 @Override
@@ -49,30 +52,30 @@ public class EmailUtils {
                     return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
                 }
             });
-            
+
             // Tạo message
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(EMAIL_USERNAME));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject("Welcome to Our Website - Registration Successful");
-            
+
             // Xây dựng nội dung HTML email
             String htmlContent = createRegistrationEmailContent(fullName, userID);
             message.setContent(htmlContent, "text/html; charset=utf-8");
-            
+
             // Gửi email
             Transport.send(message);
-            
+
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();
             return false;
         }
     }
-    
+
     /**
      * Xây dựng nội dung HTML cho email đăng ký thành công
-     * 
+     *
      * @param fullName Tên đầy đủ người dùng
      * @param userID ID người dùng
      * @return Chuỗi HTML hoàn chỉnh cho nội dung email
@@ -148,10 +151,10 @@ public class EmailUtils {
                 + "</body>\n"
                 + "</html>";
     }
-    
+
     /**
      * Gửi email xác thực đăng ký với token xác thực
-     * 
+     *
      * @param toEmail Địa chỉ email người nhận
      * @param fullName Tên đầy đủ của người dùng
      * @param token Token xác thực
@@ -165,7 +168,7 @@ public class EmailUtils {
             props.put("mail.smtp.starttls.enable", "true");
             props.put("mail.smtp.host", SMTP_HOST);
             props.put("mail.smtp.port", SMTP_PORT);
-            
+
             // Tạo phiên xác thực
             Session session = Session.getInstance(props, new Authenticator() {
                 @Override
@@ -173,31 +176,31 @@ public class EmailUtils {
                     return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
                 }
             });
-            
+
             // Tạo message
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(EMAIL_USERNAME));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
             message.setSubject("Account Verification Required");
-            
+
             // Xây dựng nội dung HTML email
             String verificationLink = "http://yourwebsite.com/verify?token=" + token;
             String htmlContent = createVerificationEmailContent(fullName, verificationLink);
-            message.setContent(htmlContent, "text/html; charset=utf-8");
-            
+            message.setContent(htmlContent, "text/html; charset=UTF-8");
+
             // Gửi email
             Transport.send(message);
-            
+
             return true;
         } catch (MessagingException e) {
             e.printStackTrace();
             return false;
         }
     }
-    
+
     /**
      * Xây dựng nội dung HTML cho email xác thực tài khoản
-     * 
+     *
      * @param fullName Tên đầy đủ người dùng
      * @param verificationLink Đường dẫn xác thực
      * @return Chuỗi HTML hoàn chỉnh cho nội dung email
@@ -273,9 +276,69 @@ public class EmailUtils {
                 + "</body>\n"
                 + "</html>";
     }
-    
+
+    private static String createOtpEmailContent(String fullName, String otp) {
+        String safeName = (fullName == null || fullName.isEmpty()) ? "Bạn" : fullName;
+        return "<!DOCTYPE html>\n"
+                + "<html>\n"
+                + "<head>\n" + "<meta charset=\"UTF-8\">\n"
+                + "</head>\n"
+                + "<body>\n"
+                + "<div>"
+                + "<p>Xin chào " + safeName + "</p>"
+                + "<p>Mã xác thực (OTP) của bạn là:</p>"
+                + "<h2 style=\"letter-spacing:4px;\">" + otp + "</h2>"
+                + "<p>Mã có hiệu lực trong " + MINUTE + " phút. Nếu bạn không yêu cầu mã này, hãy bỏ qua email này.</p>"
+                + "<hr/>"
+                + "<p style=\"font-size:12px;color:#888\">Nếu bạn không nhận được email, kiểm tra spam hoặc thử gửi lại.</p>"
+                + "</div>"
+                +"</body>\n"
+                + "</html>";
+    }
+
+    public static String generateNumericOtp() {
+        int max = (int) Math.pow(10, LENGHT);
+        int otp = random.nextInt(max);
+        return String.format("%0" + LENGHT + "d", otp);
+    }
+
+    public static String sendOtpEmail(String toEmail, String fullName) {
+        try {
+            // Thiết lập các thuộc tính
+            Properties props = new Properties();
+            props.put("mail.smtp.auth", "true");
+            props.put("mail.smtp.starttls.enable", "true");
+            props.put("mail.smtp.host", SMTP_HOST);
+            props.put("mail.smtp.port", SMTP_PORT);
+
+            // Tạo phiên xác thực
+            Session session = Session.getInstance(props, new Authenticator() {
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication(EMAIL_USERNAME, EMAIL_PASSWORD);
+                }
+            });
+
+            Message message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(EMAIL_USERNAME));
+            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
+            message.setSubject("Mã OTP (" + MINUTE + " phút)");
+
+            String otp = generateNumericOtp();
+
+            String htmlContent = createOtpEmailContent(fullName, otp);
+            message.setContent(htmlContent, "text/html; charset=UTF-8");
+
+            Transport.send(message);
+            return otp;
+        } catch (MessagingException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public static void main(String[] args) {
-        boolean check = sendRegistrationEmail("caominhtri1604@gmail.com", "Cao Minh Trí", "TriCM");
+        String check = sendOtpEmail("caominhtri1604@gmail.com", "Cao Minh Trí");
         System.out.println(check);
     }
 }

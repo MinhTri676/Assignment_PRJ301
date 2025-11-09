@@ -29,10 +29,14 @@ public class AuthController extends HttpServlet {
 
         String msg = "";
         if (!checkLogin) {
-            msg = "Username or password incorrect!";
+            msg = "Email hoặc Mật khẩu không đúng";
             url = "/WEB-INF/views/auth/login.jsp";
         } else {
             customer = customerDAO.getObjByEmail(txtEmail);
+            if(!customer.isIsActive()){
+                msg = "Tài khoản đã bị khóa";
+                url = "/WEB-INF/views/auth/login.jsp";
+            }
             if (customer.getRole().equals("admin")) {
                 url = "/WEB-INF/views/admin/dashboard.jsp";
             }

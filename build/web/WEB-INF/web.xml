@@ -8,6 +8,14 @@
         <filter-name>EncodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <servlet>
+        <servlet-name>EmailController</servlet-name>
+        <servlet-class>controller.EmailController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EmailController</servlet-name>
+        <url-pattern>/EmailController</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

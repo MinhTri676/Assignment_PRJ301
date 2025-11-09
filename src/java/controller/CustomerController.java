@@ -32,7 +32,7 @@ public class CustomerController extends HttpServlet {
             throws ServletException, IOException {
         try ( PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
-            if (action.equals("register")) {
+            if (action.equals("loadRegisterForm")) {
                 processLoadRegister(request, response);
             } else if (action.equals("listCustomer")) {
                 processListCustomer(request, response);
@@ -102,7 +102,7 @@ public class CustomerController extends HttpServlet {
         if (success) {
             response.sendRedirect(request.getContextPath() + "/MainController?action=listCustomer");
         } else {
-            request.setAttribute("errors", "Email đã sử dụng");
+            request.setAttribute("errors", "Email đã được sử dụng");
             request.getRequestDispatcher("/WEB-INF/views/admin/customer/addCustomer.jsp").forward(request, response);
         }
     }

@@ -29,25 +29,25 @@ public class MainController extends HttpServlet {
             String url = "/WEB-INF/views/auth/login.jsp";
 
             String[] authActions = {"login", "logout"};
-            String[] adminActions = {};
-            String[] customerActions = {"register", "listCustomer", "loadAddCustomerForm","addCustomer"
-                                      , "callUpdateCustomer", "updateCustomer", "deleteCustomer"};
-            String[] productActions = {"addProduct", "deleteProduct", "viewProductDetail", "listProduct"
-                                     , "loadAddProductForm", "callUpdateProduct", "updateProduct", "deleteProduct"};
+            String[] customerActions = {"loadRegisterForm", "listCustomer", "loadAddCustomerForm", "addCustomer",
+                "callUpdateCustomer", "updateCustomer", "deleteCustomer"};
+            String[] productActions = {"addProduct", "deleteProduct", "viewProductDetail", "listProduct",
+                "loadAddProductForm", "callUpdateProduct", "updateProduct", "deleteProduct"};
             String[] categoryActions = {"listCategory", "loadAddCategoryForm"};
             String[] brandActions = {"listBrand", "loadAddBrandForm"};
+            String[] emailAction = {"sendOTP", "verifyOTP"};
             if (Arrays.asList(authActions).contains(action)) {
                 url = "AuthController";
-            } else if (Arrays.asList(adminActions).contains(action)) {
-                url = "AdminController";
             } else if (Arrays.asList(productActions).contains(action)) {
                 url = "ProductController";
             } else if (Arrays.asList(customerActions).contains(action)) {
                 url = "CustomerController";
-            } else if (Arrays.asList(categoryActions).contains(action)){
+            } else if (Arrays.asList(categoryActions).contains(action)) {
                 url = "CategoryController";
-            } else if (Arrays.asList(brandActions).contains(action)){
+            } else if (Arrays.asList(brandActions).contains(action)) {
                 url = "BrandController";
+            } else if (Arrays.asList(emailAction).contains(action)) {
+                url = "EmailController";
             }
             request.getRequestDispatcher(url).forward(request, response);
         }

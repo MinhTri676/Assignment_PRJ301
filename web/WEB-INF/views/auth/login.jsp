@@ -22,6 +22,13 @@
                         <div class="alert alert-success small">${msg}</div>
                     </c:if>
 
+                    <c:if test="${not empty sessionScope.flashMessage}">
+                        <div class="alert alert-success" role="alert">
+                            ${sessionScope.flashMessage}
+                        </div>
+                        <c:remove var="flashMessage" scope="session"/>
+                    </c:if>
+
                     <!-- Standard Login form (email + password) -->
                     <form id="loginForm" action="MainController" method="POST">
                         <input type="hidden" name="action" value="login"/>
@@ -60,7 +67,7 @@
                     </div>
 
                     <div class="text-center mt-3 small">
-                        Chưa có tài khoản? <a href="${pageContext.request.contextPath}/MainController?action=register">Đăng ký</a>
+                        Chưa có tài khoản? <a href="${pageContext.request.contextPath}/MainController?action=loadRegisterForm">Đăng ký</a>
                     </div>
                 </div>
             </div>
