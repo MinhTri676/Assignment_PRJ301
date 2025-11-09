@@ -29,13 +29,20 @@ public class MainController extends HttpServlet {
             String url = "/WEB-INF/views/auth/login.jsp";
 
             String[] authActions = {"login", "logout"};
+            
             String[] customerActions = {"loadRegisterForm", "listCustomer", "loadAddCustomerForm", "addCustomer",
                 "callUpdateCustomer", "updateCustomer", "deleteCustomer"};
-            String[] productActions = {"addProduct", "deleteProduct", "viewProductDetail", "listProduct",
-                "loadAddProductForm", "callUpdateProduct", "updateProduct", "deleteProduct"};
+            
+            String[] productActions = {"addProduct", "searchProduct","sortByBrand","sortByCategory",
+                                        "viewProductDetail","listProduct", "loadAddProductForm", "callUpdateProduct",
+                                        "updateProduct", "deleteProduct"};
+            
             String[] categoryActions = {"listCategory", "loadAddCategoryForm"};
+            
             String[] brandActions = {"listBrand", "loadAddBrandForm"};
+            
             String[] emailAction = {"sendOTP", "verifyOTP"};
+            
             if (Arrays.asList(authActions).contains(action)) {
                 url = "AuthController";
             } else if (Arrays.asList(productActions).contains(action)) {

@@ -30,9 +30,8 @@
                     <div class="grid grid-4 stats">
                         <div class="card stat-card">
                             <div class="card-body">
-                                <div class="stat-title">Doanh thu hôm nay</div>
+                                <div class="stat-title">Tổng doanh thu</div>
                                 <div class="stat-value">₫ 24,500,000</div>
-                                <div class="stat-meta">Tăng 12% so với hôm qua</div>
                             </div>
                         </div>
 
@@ -40,15 +39,13 @@
                             <div class="card-body">
                                 <div class="stat-title">Đơn hàng</div>
                                 <div class="stat-value">152</div>
-                                <div class="stat-meta">12 đang xử lý</div>
                             </div>
                         </div>
 
                         <div class="card stat-card">
                             <div class="card-body">
-                                <div class="stat-title">Khách hàng mới</div>
+                                <div class="stat-title">Khách hàng</div>
                                 <div class="stat-value">34</div>
-                                <div class="stat-meta">Trong 7 ngày</div>
                             </div>
                         </div>
 
@@ -56,7 +53,6 @@
                             <div class="card-body">
                                 <div class="stat-title">Sản phẩm tồn</div>
                                 <div class="stat-value">3,120</div>
-                                <div class="stat-meta">Cảnh báo 12 sản phẩm</div>
                             </div>
                         </div>
                     </div>
@@ -76,7 +72,6 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3>Đơn hàng mới</h3>
-                                <small>Danh sách gần đây</small>
                             </div>
                             <div class="card-body recent-list">
                                 <ul>
@@ -107,6 +102,7 @@
                                         <th>Giá</th>
                                         <th>Kho</th>
                                         <th>Danh mục</th>
+                                        <th>Thương hiệu</th>
                                         <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
@@ -135,6 +131,7 @@
                                         <td>Tai nghe Bluetooth XY</td>
                                         <td>₫ 899,000</td>
                                         <td>120</td>
+                                        <td>Âm thanh</td>
                                         <td>Âm thanh</td>
                                         <td><span class="badge badge-success">Hoạt động</span></td>
                                         <td>
@@ -191,7 +188,7 @@
                     }
                 });
             })();
-            
+
         </script>
 
     </body>

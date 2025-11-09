@@ -203,11 +203,120 @@ public class ProductDAO implements Accessible<Product> {
         return list;
     }
 
+    public List<Product> getListForDashboard() {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            Connection conn = DBUtils.getConnection();
+
+            String sql = "SELECT TOP 10 p.*, b.BRAND_NAME, c.CATEGORY_NAME from PRODUCT p"
+                    + " JOIN BRAND b ON p.BRAND_ID = b.BRAND_ID"
+                    + " JOIN CATEGORY c ON p.CATEGORY_ID = c.CATEGORY_ID"
+                    + " ORDER BY NEWID()";
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+
+                Brand brand = new Brand(rs.getInt("BRAND_ID"), rs.getNString("BRAND_NAME"));
+                Category category = new Category(rs.getInt("CATEGORY_ID"), rs.getNString("CATEGORY_NAME"));
+
+                product.setProductId(rs.getInt("PRODUCT_ID"));
+                product.setProductName(rs.getString("PRODUCT_NAME"));
+                product.setQuantity(rs.getInt("QUANTITY"));
+                product.setBrandId(brand);
+                product.setCategoryId(category);
+                product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setProductImage(rs.getString("PRODUCT_IMAGE"));
+                product.setIsActive(rs.getBoolean("ISACTIVE"));
+                list.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+    public List<Product> getAllProductByBrand(int brandId) {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            Connection conn = DBUtils.getConnection();
+
+            String sql = "SELECT p.*, b.BRAND_NAME, c.CATEGORY_NAME from PRODUCT p"
+                    + " JOIN BRAND b ON p.BRAND_ID = b.BRAND_ID"
+                    + " JOIN CATEGORY c ON p.CATEGORY_ID = c.CATEGORY_ID"
+                    + " WHERE b.BRAND_ID = ?";
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, brandId);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+
+                Brand brand = new Brand(rs.getInt("BRAND_ID"), rs.getNString("BRAND_NAME"));
+                Category category = new Category(rs.getInt("CATEGORY_ID"), rs.getNString("CATEGORY_NAME"));
+
+                product.setProductId(rs.getInt("PRODUCT_ID"));
+                product.setProductName(rs.getString("PRODUCT_NAME"));
+                product.setQuantity(rs.getInt("QUANTITY"));
+                product.setBrandId(brand);
+                product.setCategoryId(category);
+                product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setProductImage(rs.getString("PRODUCT_IMAGE"));
+                product.setIsActive(rs.getBoolean("ISACTIVE"));
+                list.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+    
+        public List<Product> getAllProductByCategory(int categoryId) {
+        ArrayList<Product> list = new ArrayList<>();
+        try {
+            Connection conn = DBUtils.getConnection();
+
+            String sql = "SELECT p.*, b.BRAND_NAME, c.CATEGORY_NAME from PRODUCT p"
+                    + " JOIN BRAND b ON p.BRAND_ID = b.BRAND_ID"
+                    + " JOIN CATEGORY c ON p.CATEGORY_ID = c.CATEGORY_ID"
+                    + " WHERE c.CATEGORY_ID = ?";
+
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setInt(1, categoryId);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+
+                Brand brand = new Brand(rs.getInt("BRAND_ID"), rs.getNString("BRAND_NAME"));
+                Category category = new Category(rs.getInt("CATEGORY_ID"), rs.getNString("CATEGORY_NAME"));
+
+                product.setProductId(rs.getInt("PRODUCT_ID"));
+                product.setProductName(rs.getString("PRODUCT_NAME"));
+                product.setQuantity(rs.getInt("QUANTITY"));
+                product.setBrandId(brand);
+                product.setCategoryId(category);
+                product.setPrice(rs.getBigDecimal("PRICE"));
+                product.setProductImage(rs.getString("PRODUCT_IMAGE"));
+                product.setIsActive(rs.getBoolean("ISACTIVE"));
+                list.add(product);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         ProductDAO p = new ProductDAO();
-        Product product = p.getObjById(100050);
-        product.setIsActive(true);
-        boolean check = p.update(product);
-        System.out.println(check);
+        List<Product> product = p.getAllProductByBrand(1);
+        for (int i = 0; i < product.size(); i++) {
+            System.out.println(product.get(i).toString());
+        }
+
     }
 }

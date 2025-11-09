@@ -39,7 +39,13 @@ public class ProductController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
 
-            if (action.equals("viewProductDetail")) {
+            if (action.equals("searchProduct")) {
+                processSearchProduct(request, response);
+            } else if (action.equals("sortByBrand")) {
+                processListProductByBrand(request, response);
+            } else if (action.equals("sortByCategory")) {
+                processListProductByCategory(request, response);
+            } else if (action.equals("viewProductDetail")) {
                 processViewProductDetail(request, response);
             } else if (action.equals("listProduct")) {
                 processListProduct(request, response);
@@ -57,7 +63,58 @@ public class ProductController extends HttpServlet {
         }
     }
 
-    public void processViewProductDetail(HttpServletRequest request, HttpServletResponse response) {
+    public void processListProductByCategory(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String txtCategoryId = request.getParameter("txtCategoryId");
+        int CategoryId = 0;
+        try {
+            CategoryId = Integer.parseInt(txtCategoryId);
+        } catch (Exception e) {
+        }
+        List<Brand> brands = brandService.getAll();
+        List<Category> categories = categoryService.getAll();
+        List<Product> products = productService.getProductByCategory(CategoryId);
+
+        request.setAttribute("products", products);
+        request.setAttribute("brands", brands);
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request, response);
+    }
+
+    public void processListProductByBrand(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String txtBrandId = request.getParameter("txtBrandId");
+        int brandId = 0;
+        try {
+            brandId = Integer.parseInt(txtBrandId);
+        } catch (Exception e) {
+        }
+        List<Brand> brands = brandService.getAll();
+        List<Category> categories = categoryService.getAll();
+        List<Product> products = productService.getProductByBrand(brandId);
+
+        request.setAttribute("products", products);
+        request.setAttribute("brands", brands);
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request, response);
+    }
+
+    public void processSearchProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String search = request.getParameter("txtSearch");
+        List<Brand> brands = brandService.getAll();
+        List<Category> categories = categoryService.getAll();
+        List<Product> products = productService.getListByProductName(search);
+
+        request.setAttribute("products", products);
+        request.setAttribute("searchValue", search);
+        request.setAttribute("brands", brands);
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("/WEB-INF/views/dashboard.jsp").forward(request, response);
+    }
+
+    public void processViewProductDetail(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         String txtPid = request.getParameter("pid");
         try {
             int pid = Integer.parseInt(txtPid);

@@ -322,7 +322,7 @@ public class EmailUtils {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(EMAIL_USERNAME));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));
-            message.setSubject("Mã OTP (" + MINUTE + " phút)");
+            message.setSubject("Mã OTP xác minh (" + MINUTE + " phút)");
 
             String otp = generateNumericOtp();
 

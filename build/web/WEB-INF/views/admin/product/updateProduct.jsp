@@ -91,10 +91,6 @@
                                              If the user doesn't pick a new file, keep the existingBase64 value so server can keep old image. -->
                                         <input type="hidden" id="productImageBase64" name="productImageBase64"
                                                value="<c:out value='${product.productImage}'/>"/>
-                                        <!-- Optional: show current image filename if available -->
-                                        <c:if test="${not empty product.productImage}">
-                                            <div class="muted-text">Tệp hiện tại: ${product.productImage}</div>
-                                        </c:if>
                                     </div>
 
                                     <div style="max-width:160px; text-align:center;">

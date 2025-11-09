@@ -56,17 +56,13 @@
 
                             <!-- Short info -->
                             <ul class="product-meta list-unstyled small text-muted mb-3">
-                                <li>SKU: <strong class="text-dark"><c:out value="${product.productId}" /></strong></li>
                                 <li>Trạng thái:
                                     <c:choose>
-                                        <c:when test="${product.isActive and product.quantity != null and product.quantity > 0}">
-                                            <strong class="text-dark">Còn hàng (${product.quantity})</strong>
-                                        </c:when>
-                                        <c:when test="${product.isActive and (product.quantity == null or product.quantity <= 0)}">
-                                            <strong class="text-dark">Còn hàng</strong>
+                                        <c:when test="${product.quantity <= 0}">
+                                            <strong class="text-danger">Hết hàng</strong>
                                         </c:when>
                                         <c:otherwise>
-                                            <strong class="text-danger">Hết hàng</strong>
+                                            <strong class="text-dark">Còn hàng (${product.quantity})</strong>
                                         </c:otherwise>
                                     </c:choose>
                                 </li>
@@ -102,11 +98,15 @@
                                     <input type="number" name="qty" class="form-control text-center qty-input" value="1" min="1" aria-label="Số lượng" />
                                     <button type="button" class="btn btn-outline-secondary btn-qty" data-action="inc">+</button>
                                 </div>
-
-                                <button type="submit" class="btn btn-primary-custom">Thêm vào giỏ</button>
-                                <c:if test="${product.isActive}">
-                                    <a href="${pageContext.request.contextPath}/checkout/now?productId=${product.productId}" class="btn btn-outline-custom">Mua ngay</a>
-                                </c:if>
+                                <c:choose>
+                                    <c:when test="${product.quantity <= 0}">
+                                        <button type="button" class="btn btn-primary-custom">Tạm hết hàng</button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button type="submit" class="btn btn-primary-custom">Thêm vào giỏ</button>
+                                        <a href="${pageContext.request.contextPath}/checkout/now?productId=${product.productId}" class="btn btn-outline-custom">Mua ngay</a>
+                                    </c:otherwise>
+                                </c:choose>
                             </form>
                         </div>
                     </div>

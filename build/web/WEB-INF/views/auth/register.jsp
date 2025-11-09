@@ -127,7 +127,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Hủy</button>
-                            <button id="btnVerifyOtp" type="submit" class="btn btn-primary-custom btn-sm">Xác thực OTP</button>
+                            <button id="btnVerifyOtp" type="submit" class="btn btn-primary-customs btn-sm">Xác thực OTP</button>
                         </div>
                     </form>
                 </div>

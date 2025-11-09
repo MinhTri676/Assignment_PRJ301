@@ -48,6 +48,13 @@ public class EmailController extends HttpServlet {
         String password = request.getParameter("txtPassword");
 
         // try to send email - adapt sendOtpEmail to your mail util
+        CustomerService customerService = new CustomerService();
+        Customer customer = customerService.getCustomerByEmail(email);
+
+        if (customer != null) {
+            request.setAttribute("error", "Email đã được sử dụng");
+            request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
+        }
         String otp = null;
         try {
             otp = emailServie.sendOTP(email, fullname);
@@ -58,7 +65,7 @@ public class EmailController extends HttpServlet {
 
         if (otp == null) {
             request.setAttribute("error", "Không thể gửi OTP. Vui lòng thử lại sau.");
-            request.getRequestDispatcher("/auth/register").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/auth/register.jsp").forward(request, response);
         }
         HttpSession session = request.getSession(true);
         session.setAttribute("otp", otp);
@@ -156,7 +163,7 @@ public class EmailController extends HttpServlet {
             CustomerService customerService = new CustomerService();
 
             boolean success = customerService.insert(customer);
-            
+
             if (success) {
                 // success: set flash message and redirect to login (or wherever)
                 session.setAttribute("flashMessage", "Đăng ký thành công. Vui lòng đăng nhập.");

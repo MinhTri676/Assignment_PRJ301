@@ -32,7 +32,7 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="btnCategories" role="menu">
                                             <c:forEach var="c" items="${categories}">
-                                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/category/${c.categoryId}">${c.categoryName}</a></li>
+                                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/MainController?action=sortByCategory&txtCategoryId=${c.categoryId}">${c.categoryName}</a></li>
                                                 </c:forEach>
                                                 <c:if test="${empty categories}">
                                                 <li><span class="dropdown-item-text text-muted">Chưa có danh mục.</span></li>
@@ -48,7 +48,7 @@
                                         </button>
                                         <ul class="dropdown-menu" aria-labelledby="btnBrands" role="menu">
                                             <c:forEach var="b" items="${brands}">
-                                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/brands/${b.brandId}">${b.brandName}</a></li>
+                                                <li><a class="dropdown-item" href="${pageContext.request.contextPath}/MainController?action=sortByBrand&txtBrandId=${b.brandId}">${b.brandName}</a></li>
                                                 </c:forEach>
                                                 <c:if test="${empty brands}">
                                                 <li><span class="dropdown-item-text text-muted">Chưa có thương hiệu.</span></li>
@@ -76,7 +76,7 @@
                                         <div class="card-image position-relative">
                                             <c:choose>
                                                 <c:when test="${not empty p.productImage}">
-                                                    <img src="${p.productImage}" alt="${p.productName}" class="img-cover" loading="lazy" />
+                                                    <img src="${p.productImage}" alt="${p.productName}" class="img-cover" loading="lazy" style="width: 100px" />
                                                 </c:when>
                                                 <c:otherwise>
                                                     <div class="placeholder-image">No image</div>

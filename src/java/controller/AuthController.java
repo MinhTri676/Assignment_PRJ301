@@ -1,6 +1,5 @@
 package controller;
 
-import dao.CustomerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -10,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Customer;
+import service.CustomerService;
 
 @WebServlet(name = "AuthController", urlPatterns = {"/AuthController"})
 public class AuthController extends HttpServlet {
@@ -19,9 +19,9 @@ public class AuthController extends HttpServlet {
         String txtEmail = request.getParameter("txtEmail");
         String txtPassword = request.getParameter("txtPassword");
 
-        CustomerDAO customerDAO = new CustomerDAO();
+        CustomerService customerService = new CustomerService();
 
-        boolean checkLogin = customerDAO.login(txtEmail, txtPassword);
+        boolean checkLogin = customerService.login(txtEmail, txtPassword);
         // Cach chuyen trang
         String url = "";
         url = "DashboardController";
@@ -32,7 +32,7 @@ public class AuthController extends HttpServlet {
             msg = "Email hoặc Mật khẩu không đúng";
             url = "/WEB-INF/views/auth/login.jsp";
         } else {
-            customer = customerDAO.getObjByEmail(txtEmail);
+            customer = customerService.getCustomerByEmail(txtEmail);
             if(!customer.isIsActive()){
                 msg = "Tài khoản đã bị khóa";
                 url = "/WEB-INF/views/auth/login.jsp";

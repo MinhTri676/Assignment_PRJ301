@@ -16,8 +16,16 @@ public class CustomerService {
 
     private final CustomerDAO dao = new CustomerDAO();
 
+    public boolean login(String email, String password){
+        return dao.login(email, password);
+    }
+    
     public List<Customer> getAll() {
         return dao.getListAll();
+    }
+    
+    public Customer getCustomerByEmail(String email){
+        return dao.getObjByEmail(email);
     }
 
     public boolean insert(Customer customer) {

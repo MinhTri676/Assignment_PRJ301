@@ -26,8 +26,9 @@
 
         <!-- Search -->
         <div class="search flex-grow-1 mx-3">
-            <form class="input-group" action="${pageContext.request.contextPath}/search">
-                <input id="search-input" name="q" type="search" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm"/>
+            <form class="input-group" action="MainController">
+                <input type="hidden" name="action" value="searchProduct"/>
+                <input id="search-input" name="txtSearch" value="${requestScope.searchValue}" type="search" class="form-control form-control-sm" placeholder="Tìm kiếm sản phẩm"/>
                 <button type="submit" class="btn btn-primary btn-sm d-flex align-items-center" aria-label="Tìm kiếm">
                     <i class="bi bi-search" style="font-size:1rem;"></i>
                 </button>

@@ -34,7 +34,7 @@ public class DashboardController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            List<Product> products = productService.getAll();
+            List<Product> products = productService.getForDashboard();
             List<Category> categories = categoryService.getAll();
             List<Brand> brands = brandService.getAll();
 

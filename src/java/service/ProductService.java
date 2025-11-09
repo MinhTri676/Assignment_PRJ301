@@ -20,8 +20,24 @@ public class ProductService {
         return dao.getListAll();
     }
 
+    public List<Product> getForDashboard() {
+        return dao.getListForDashboard();
+    }
+
+    public List<Product> getProductByBrand(int BrandId) {
+        return dao.getAllProductByBrand(BrandId);
+    }
+
+    public List<Product> getProductByCategory(int CategoryId) {
+        return dao.getAllProductByCategory(CategoryId);
+    }
+
     public Product getProductById(int id) {
         return dao.getObjById(id);
+    }
+
+    public List<Product> getListByProductName(String name) {
+        return dao.getAllProductByName(name);
     }
 
     public boolean insert(Product product) {
@@ -31,8 +47,8 @@ public class ProductService {
     public boolean update(Product product) {
         return dao.update(product);
     }
-    
-    public boolean delete(Product product){
+
+    public boolean delete(Product product) {
         return dao.delete(product);
     }
 }
