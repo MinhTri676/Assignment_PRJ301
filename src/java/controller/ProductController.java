@@ -120,7 +120,7 @@ public class ProductController extends HttpServlet {
             int pid = Integer.parseInt(txtPid);
             Product product = productService.getProductById(pid);
             request.setAttribute("product", product);
-            request.getRequestDispatcher("/WEB-INF/views/customer/productDetail.jsp").forward(request, response);
+            request.getRequestDispatcher("/WEB-INF/views/productDetail.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

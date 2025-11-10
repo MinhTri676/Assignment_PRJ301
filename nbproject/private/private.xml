@@ -11,46 +11,62 @@
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/CategoryService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/ProductDAO.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/RankService.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/EmailController.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/category/viewCategories.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/adminHeader.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/customer/vnpay_pay.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/CartService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/sidebar.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/customer/productDetail.css</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/Product.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/customerHeader.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/CartController.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/MainController.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/product/addProduct.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/com/vnpay/common/ajaxServlet.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/customer/updateCustomer.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/CartDAO.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/BrandDAO.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/footer.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/web.xml</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/ultils/EmailUtils.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/com/vnpay/common/vnpayQuery.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/auth/login.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/customer/cart.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/productDetail.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/customer/addCustomer.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/customer/viewCustomer.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/DashboardController.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/category/addCategory.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/CartItem.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/admin/dashboard.css</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/RankDAO.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/ProductService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/brand/viewBrands.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/admin/add.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/CartItemDAO.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/auth/register.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/EmailService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/dao/CustomerDAO.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/AuthController.java</file>
-            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/partials/header.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/product/updateProduct.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/com/vnpay/common/vnpayRefund.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/CustomerController.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/filter/AdminFilter.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/index.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/Customer.java</file>
-            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/customer/productDetail.jsp</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/CartItemService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/ProductController.java</file>
-            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/AdminController.java</file>
-            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/customer/dashboard.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/auth/auth.css</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/partials/header.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/com/vnpay/common/Config.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/assets/css/partials/footer.css</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/model/Cart.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/dashboard.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/product/viewProducts.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/CustomerService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/controller/BrandController.java</file>
+            <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/src/java/service/BrandService.java</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/dashboard.jsp</file>
             <file>file:/C:/PRJ301%20-%20Fall25/Assignment_PRJ301/web/WEB-INF/views/admin/brand/addBrand.jsp</file>
         </group>

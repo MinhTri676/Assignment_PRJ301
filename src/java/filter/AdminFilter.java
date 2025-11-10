@@ -25,7 +25,7 @@ import model.Customer;
  *
  * @author caomi
  */
-@WebFilter(filterName = "AdminFilter", urlPatterns = {"/WEB-INF/views/admin/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "AdminFilter", urlPatterns = {"/WEB-INF/views/admin/*", "/WEB-INF/views/customer/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class AdminFilter implements Filter {
 
     private static final boolean debug = true;
@@ -48,12 +48,8 @@ public class AdminFilter implements Filter {
         HttpSession session = httpRequest.getSession();
         if (session.getAttribute("customer") == null) {
             httpResponse.sendRedirect("DashboardController");
-        } else {
-            Customer customer = (Customer) session.getAttribute("customer");
-            if (!customer.getRole().equals("admin")) {
-                httpResponse.sendRedirect("MainController");
-            }
         }
+
     }
 
     private void doAfterProcessing(ServletRequest request, ServletResponse response)

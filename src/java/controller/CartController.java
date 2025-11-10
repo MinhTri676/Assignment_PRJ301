@@ -6,62 +6,57 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
+import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Cart;
+import model.CartItem;
+import service.CartService;
 
 /**
  *
  * @author caomi
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+public class CartController extends HttpServlet {
 
+    private CartService cartService = new CartService();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             String action = request.getParameter("action");
 
-            String url = "/WEB-INF/views/auth/login.jsp";
-
-            String[] authActions = {"login", "logout"};
-            
-            String[] customerActions = {"loadRegisterForm", "listCustomer", "loadAddCustomerForm", "addCustomer",
-                "callUpdateCustomer", "updateCustomer", "deleteCustomer"};
-            
-            String[] productActions = {"addProduct", "searchProduct","sortByBrand","sortByCategory",
-                                        "viewProductDetail","listProduct", "loadAddProductForm", "callUpdateProduct",
-                                        "updateProduct", "deleteProduct"};
-            
-            String[] categoryActions = {"listCategory", "loadAddCategoryForm"};
-            
-            String[] brandActions = {"listBrand", "loadAddBrandForm"};
-            
-            String[] emailAction = {"sendOTP", "verifyOTP"};
-            
-            String[] cartAction = {"viewCart", "checkout"};
-            
-            if (Arrays.asList(authActions).contains(action)) {
-                url = "AuthController";
-            } else if (Arrays.asList(productActions).contains(action)) {
-                url = "ProductController";
-            } else if (Arrays.asList(customerActions).contains(action)) {
-                url = "CustomerController";
-            } else if (Arrays.asList(categoryActions).contains(action)) {
-                url = "CategoryController";
-            } else if (Arrays.asList(brandActions).contains(action)) {
-                url = "BrandController";
-            } else if (Arrays.asList(emailAction).contains(action)) {
-                url = "EmailController";
-            }  else if (Arrays.asList(cartAction).contains(action)) {
-                url = "CartController";
+            if (action.equals("viewCart")) {
+                processViewCart(request, response);
+            } else if (action.equals("checkout")) {
+                processCheckout(request, response);
             }
-            request.getRequestDispatcher(url).forward(request, response);
         }
+    }
+
+    public void processViewCart(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String txtCid = request.getParameter("cid");
+        int cid = 0;
+        try {
+            cid = Integer.parseInt(txtCid);
+        } catch (Exception e) {
+        }
+        Cart cart = cartService.getCartByCustomerId(cid);
+        List<CartItem> items = cartService.getListByCustomerId(cid);
+        
+        request.setAttribute("cart", cart);
+        request.setAttribute("items", items);
+        
+        request.getRequestDispatcher("/WEB-INF/views/customer/cart.jsp").forward(request, response);
+        
+    }
+    
+    public void processCheckout(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException{
+        request.getRequestDispatcher("/WEB-INF/views/customer/vnpay_pay.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

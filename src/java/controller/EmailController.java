@@ -47,7 +47,6 @@ public class EmailController extends HttpServlet {
         String fullname = request.getParameter("txtFullname");
         String password = request.getParameter("txtPassword");
 
-        // try to send email - adapt sendOtpEmail to your mail util
         CustomerService customerService = new CustomerService();
         Customer customer = customerService.getCustomerByEmail(email);
 
@@ -166,7 +165,7 @@ public class EmailController extends HttpServlet {
 
             if (success) {
                 // success: set flash message and redirect to login (or wherever)
-                session.setAttribute("flashMessage", "Đăng ký thành công. Vui lòng đăng nhập.");
+                session.setAttribute("flashMessage", "Đăng ký thành công. Vui lòng đăng nhập");
                 request.getRequestDispatcher("/WEB-INF/views/auth/login.jsp").forward(request, response);
             } else {
                 // user creation failed (e.g., email exists, DB error)

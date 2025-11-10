@@ -38,9 +38,13 @@
         <!-- Right actions -->
         <div class="actions d-flex align-items-center">
             <!-- Cart -->
-            <a class="btn btn-outline-secondary btn-sm position-relative" href="${pageContext.request.contextPath}/cart" aria-label="Giỏ hàng">
-                <i class="bi bi-cart" style="font-size:1.125rem;"></i>
-            </a>
+            <form action="MainController">
+                <input type="hidden" name="action" value="viewCart"/>
+                <input type="hidden" name="cid" value="${sessionScope.customer.customerId}"/>
+                <button class="btn btn-outline-secondary btn-sm position-relative" type="submit">
+                    <i class="bi bi-cart" style="font-size:1.125rem;"></i> 
+                </button>
+            </form>
             <!-- Account -->
             <c:choose>
                 <c:when test="${not empty sessionScope.customer}">
