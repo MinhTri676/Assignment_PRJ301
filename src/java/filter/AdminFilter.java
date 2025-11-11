@@ -25,7 +25,7 @@ import model.Customer;
  *
  * @author caomi
  */
-@WebFilter(filterName = "AdminFilter", urlPatterns = {"/WEB-INF/views/admin/*", "/WEB-INF/views/customer/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
+@WebFilter(filterName = "AdminFilter", urlPatterns = {"/WEB-INF/views/admin/*", "/WEB-INF/views/customer/*", "/WEB-INF/views/partials/*"}, dispatcherTypes = {DispatcherType.REQUEST, DispatcherType.FORWARD})
 public class AdminFilter implements Filter {
 
     private static final boolean debug = true;

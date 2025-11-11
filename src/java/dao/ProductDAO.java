@@ -208,7 +208,7 @@ public class ProductDAO implements Accessible<Product> {
         try {
             Connection conn = DBUtils.getConnection();
 
-            String sql = "SELECT TOP 10 p.*, b.BRAND_NAME, c.CATEGORY_NAME from PRODUCT p"
+            String sql = "SELECT TOP 20 p.*, b.BRAND_NAME, c.CATEGORY_NAME from PRODUCT p"
                     + " JOIN BRAND b ON p.BRAND_ID = b.BRAND_ID"
                     + " JOIN CATEGORY c ON p.CATEGORY_ID = c.CATEGORY_ID"
                     + " ORDER BY NEWID()";
@@ -317,6 +317,5 @@ public class ProductDAO implements Accessible<Product> {
         for (int i = 0; i < product.size(); i++) {
             System.out.println(product.get(i).toString());
         }
-
     }
 }

@@ -22,7 +22,18 @@ public class CartDAO implements Accessible<Cart> {
 
     @Override
     public boolean insert(Cart obj) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        try {
+            Connection c = DBUtils.getConnection();
+            String sql = "INSERT INTO CART (CUSTOMER_ID) VALUES (?)";
+
+            PreparedStatement ps = c.prepareStatement(sql);
+            ps.setInt(1, obj.getCustomerId().getCustomerId());
+
+            int i = ps.executeUpdate();
+            return i > 0;
+        } catch (Exception e) {
+        }
+        return false;
     }
 
     @Override
@@ -87,8 +98,8 @@ public class CartDAO implements Accessible<Cart> {
         }
         return list;
     }
-    
-        public Cart getObjByCustomerId(int id) {
+
+    public Cart getObjByCustomerId(int id) {
         try {
             Connection conn = DBUtils.getConnection();
 
@@ -120,7 +131,7 @@ public class CartDAO implements Accessible<Cart> {
         for (Cart cart1 : cart) {
             System.out.println(cart1.toString());
         }
-        
+
         Cart c1 = c.getObjByCustomerId(10002);
         System.out.println(c1.toString());
     }

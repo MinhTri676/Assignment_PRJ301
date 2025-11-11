@@ -18,4 +18,16 @@ public class CartItemService {
     public List<CartItem> getListByCartId(int cartId){
         return dao.getListByCartId(cartId);
     }
+    
+    public CartItem getObjectByProductId(int productId, int cartId){
+        return dao.getObjById(productId, cartId);
+    }
+    
+    public boolean insert(CartItem item){
+        return dao.insert(item);
+    }
+    
+    public boolean update(CartItem item){
+        return dao.update(item);
+    }
 }

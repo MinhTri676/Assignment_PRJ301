@@ -91,8 +91,10 @@
                             </ul>
 
                             <!-- Quantity & Add to cart -->
-                            <form action="${pageContext.request.contextPath}/cart/add" method="get" class="d-flex align-items-center gap-2 mb-3">
-                                <input type="hidden" name="id" value="${product.productId}" />
+                            <form action="MainController" method="POST" class="d-flex align-items-center gap-2 mb-3">
+                                <input type="hidden" name="cid" value="${sessionScope.customer.customerId}"/>
+                                <input type="hidden" name="pid" value="${product.productId}"/>
+                                <input type="hidden" name="action" value="addToCart"/>
                                 <div class="input-group quantity-group" style="width:140px;">
                                     <button type="button" class="btn btn-outline-secondary btn-qty" data-action="dec">−</button>
                                     <input type="number" name="qty" class="form-control text-center qty-input" value="1" min="1" aria-label="Số lượng" />

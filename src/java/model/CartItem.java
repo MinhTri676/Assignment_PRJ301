@@ -5,18 +5,26 @@
 package model;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  *
  * @author caomi
  */
 public class CartItem {
+
     private Cart cartId;
     private Product productId;
     private int quantity;
     private BigDecimal price;
 
     public CartItem() {
+    }
+
+    public CartItem(Cart cartId, Product productId, int quantity) {
+        this.cartId = cartId;
+        this.productId = productId;
+        this.quantity = quantity;
     }
 
     public CartItem(Cart cartId, Product productId, int quantity, BigDecimal price) {
@@ -58,10 +66,15 @@ public class CartItem {
         this.price = price;
     }
 
+    public BigDecimal getTotalPrice() {
+        BigDecimal qty = BigDecimal.valueOf(quantity);
+        BigDecimal total = price.multiply(qty);
+        return total;
+    }
+
     @Override
     public String toString() {
-        return "cartId: " + cartId.getCartId() + ", " + productId.getQuantity() + ", quantity: " + quantity + ", price: " + price;
+        return "cartId: " + cartId.getCartId() + ", " + productId.getProductId() + ", quantity: " + quantity + ", price: " + getTotalPrice();
     }
-    
-    
+
 }

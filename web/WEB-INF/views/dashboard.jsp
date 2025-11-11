@@ -96,8 +96,18 @@
                                             </div>
                                         </div>
                                         <div class="d-flex gap-2 mt-2">
-                                            <a href="${pageContext.request.contextPath}/products/${p.productId}" class="btn btn-sm btn-outline-custom">Mua ngay</a>
-                                            <a href="${pageContext.request.contextPath}/cart/add?id=${p.productId}" class="btn btn-sm btn-primary-custom">Thêm vào giỏ hàng</a>
+                                            <form action="MainController">
+                                                <input type="hidden" name="cid" value="${sessionScope.customer.customerId}"/>
+                                                <input type="hidden" name="pid" value="${p.productId}"/>
+                                                <input type="hidden" name="action" value="checkout"/>
+                                                <button type="submit" class="btn btn-sm btn-outline-custom">Mua Ngay</button>
+                                            </form>
+                                            <form action="MainController">
+                                                <input type="hidden" name="cid" value="${sessionScope.customer.customerId}"/>
+                                                <input type="hidden" name="pid" value="${p.productId}"/>
+                                                <input type="hidden" name="action" value="addToCart"/>
+                                                <button type="submit" class="btn btn-sm btn-primary-custom">Thêm vào giỏ hàng</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

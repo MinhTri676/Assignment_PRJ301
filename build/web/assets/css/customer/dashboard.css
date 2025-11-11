@@ -17,6 +17,18 @@
     padding: 0 1rem;
 }
 
+.qty-input {
+    width: 70px;
+    text-align: center;
+}
+.cart-table td, .cart-table th {
+    vertical-align: middle;
+}
+.text-muted-sm {
+    font-size: .9rem;
+    color: #6c757d;
+}
+
 /* Buttons (slightly smaller paddings) */
 .btn-primary-custom {
     background: var(--primary-gradient);
@@ -250,5 +262,6 @@
     display: flex !important;
     flex-direction: column !important;
 }
+
 
 /* End of dashboard.css */

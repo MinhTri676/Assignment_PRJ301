@@ -43,7 +43,7 @@ public class MainController extends HttpServlet {
             
             String[] emailAction = {"sendOTP", "verifyOTP"};
             
-            String[] cartAction = {"viewCart", "checkout"};
+            String[] cartAction = {"viewCart", "checkout", "addToCart"};
             
             if (Arrays.asList(authActions).contains(action)) {
                 url = "AuthController";
